@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Chấm điểm</title>
+        <link
+            href="https://fonts.googleapis.com/css?family=Roboto"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+    </head>
+    <body
+        onload="initializeGame()"
+        onkeydown="handleKeyEvent(event,true)"
+        onkeyup="handleKeyEvent(event,false)"
+    >
+        <div class="header">
+            <p class="weight-title" id="weight-title">Hạng Cân - Giới Tính</p>
+        </div>
+
+        <div class="content">
+            <div class="left-content">
+                <p
+                    id="athlete-name-blue"
+                    class="athlete-name-blue full-name-ath"
+                >
+                    Tên VDV
+                </p>
+                <p id="team-blue" class="team-blue">Đoàn</p>
+                <div class="score-section-blue">
+                    <p id="score-blue" class="score-blue">0</p>
+                    <div class="gam-jeom-section-blue">
+                        <p class="gam-joem-title-blue">Lỗi</p>
+                        <p id="gam-joem-blue" class="gam-joem-score-blue">0</p>
+                    </div>
+                </div>
+                <div class="score-summary-blue">
+                    <table>
+                        <tr class="header-table">
+                            <th></th>
+                            <th>R1</th>
+                            <th>R2</th>
+                            <th>R3</th>
+                            <th>G</th>
+                            <th>Total</th>
+                            <th>Final</th>
+                            <th>IVR</th>
+                        </tr>
+                        <tr class="row-table">
+                            <td>Điểm</td>
+                            <td id="deuk-joem-round1-blue">0</td>
+                            <td id="deuk-joem-round2-blue">0</td>
+                            <td id="deuk-joem-round3-blue">0</td>
+                            <td id="deuk-joem-round4-blue">0</td>
+                            <td id="deuk-joem-total-blue">0</td>
+                            <td rowspan="2">0</td>
+                            <td rowspan="2">0</td>
+                        </tr>
+                        <tr class="row-table">
+                            <td>Lỗi</td>
+                            <td id="gam-joem-round1-blue">0</td>
+                            <td id="gam-joem-round2-blue">0</td>
+                            <td id="gam-joem-round3-blue">0</td>
+                            <td id="gam-joem-round4-blue">0</td>
+                            <td id="gam-joem-total-blue">0</td>
+                            <!-- <td>0</td> -->
+                            <!-- <td>0</td> -->
+                        </tr>
+                    </table>
+                </div>
+                <div class="cal-point-blue">
+                    <div class="hand-cal-point-blue">
+                        <button
+                            type="button"
+                            onclick="onPlusScoreForBlue()"
+                            id="custom-button-top-blue"
+                            class="custom-button-top-blue"
+                        >
+                            <div class="plus-blue">+</div>
+                        </button>
+                        <span class="span-title">Điểm</span>
+                        <button
+                            type="button"
+                            onclick="onMinusScoreForBlue()"
+                            id="custom-button-bottom-blue"
+                            class="custom-button-bottom-blue"
+                        >
+                            <div class="minus-blue">-</div>
+                        </button>
+                    </div>
+                    <div class="armor-cal-point-blue">
+                        <button
+                            type="button"
+                            onclick="onPlusGamJoemBlue()"
+                            class="custom-button-top-blue"
+                        >
+                            <p class="minus-blue">+</p>
+                        </button>
+                        <span class="span-title">Lỗi</span>
+                        <button
+                            type="button"
+                            onclick="onMinusGamJoemBlue()"
+                            class="custom-button-bottom-blue"
+                        >
+                            <p class="minus-blue">-</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <p id="athlete-name-red" class="athlete-name-red full-name-ath">
+                    Tên VDV
+                </p>
+                <p id="team-red" class="team-red">Đoàn</p>
+                <div class="score-section-red">
+                    <p id="score-red" class="score-red">0</p>
+                    <div class="gam-jeom-section-red">
+                        <p class="gam-jeom-title-red">Lỗi</p>
+                        <p id="gam-joem-red" class="gam-jeom-score-red">0</p>
+                    </div>
+                </div>
+                <div class="score-summary-red">
+                    <table>
+                        <tr class="header-table">
+                            <th></th>
+                            <th>R1</th>
+                            <th>R2</th>
+                            <th>R3</th>
+                            <th>G</th>
+                            <th>Total</th>
+                            <th>Final</th>
+                            <th>IVR</th>
+                        </tr>
+                        <tr class="row-table">
+                            <td>Điểm</td>
+                            <td id="deuk-joem-round1-red">0</td>
+                            <td id="deuk-joem-round2-red">0</td>
+                            <td id="deuk-joem-round3-red">0</td>
+                            <td id="deuk-joem-round4-red">0</td>
+                            <td id="deuk-joem-total-red">0</td>
+                            <td rowspan="2">0</td>
+                            <td rowspan="2">0</td>
+                        </tr>
+                        <tr class="row-table">
+                            <td>Lỗi</td>
+                            <td id="gam-joem-round1-red">0</td>
+                            <td id="gam-joem-round2-red">0</td>
+                            <td id="gam-joem-round3-red">0</td>
+                            <td id="gam-joem-round4-red">0</td>
+                            <td id="gam-joem-total-red">0</td>
+                            <!-- <td>0</td> -->
+                            <!-- <td>0</td> -->
+                        </tr>
+                    </table>
+                </div>
+                <div class="cal-point-red">
+                    <div class="hand-cal-point-red">
+                        <button
+                            type="button"
+                            onclick="onPlusScoreForRed()"
+                            id="custom-button-top-red"
+                            class="custom-button-top-red"
+                        >
+                            <div class="plus-red">+</div>
+                        </button>
+                        <span class="span-title">Điểm</span>
+                        <button
+                            type="button"
+                            onclick="onMinusScoreForRed()"
+                            class="custom-button-bottom-red"
+                        >
+                            <p class="minus-red">-</p>
+                        </button>
+                    </div>
+                    <div class="armor-cal-point-red">
+                        <button
+                            type="button"
+                            onclick="onPlusGamJoemRed()"
+                            class="custom-button-top-red"
+                        >
+                            <p class="plus-red">+</p>
+                        </button>
+                        <span class="span-title">Lỗi</span>
+                        <button
+                            type="button"
+                            onclick="onMinusGamJoemRed()"
+                            class="custom-button-bottom-red"
+                        >
+                            <p class="minus-red">-</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="center-content">
+                <div class="match-content">
+                    <p>Trận</p>
+                    <br />
+                    <p id="match-value">0</p>
+                </div>
+                <div id="content-result" class="content-result">
+                    <p id="timer">00:00</p>
+                </div>
+                <div
+                    id="content-result-break-time"
+                    class="content-result-break-time"
+                >
+                    <span id="content-title-break" class="content-title-break"
+                        >Nghi giữa hiệp
+                    </span>
+                    <p id="break-timer">00:00</p>
+                </div>
+                <div class="round-content">
+                    <p>Hiệp</p>
+                    <br />
+                    <p id="round-number">1</p>
+                </div>
+                <div></div>
+                <div class="status-referee">
+                    <div class="left-status-referee">
+                        <button
+                            type="button"
+                            onclick="onRefereePlusForBlue()"
+                            id="custom-button-top-red"
+                            class="custom-button-top-referee"
+                        >
+                            <div class="plus-blue">+</div>
+                        </button>
+                    </div>
+                    <div style="width: 10px"></div>
+                    <div class="right-status-referee">
+                        <button
+                            type="button"
+                            onclick="onRefereePlusForRed()"
+                            id="custom-button-top-red"
+                            class="custom-button-top-referee"
+                        >
+                            <div class="plus-red">+</div>
+                        </button>
+                    </div>
+                </div>
+                <div class="status-content">
+                    <div class="left-status">
+                        <span id="blue_status"></span>
+                    </div>
+                    <div class="right-status">
+                        <span id="red_status"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="left-footer">
+                <!-- <div class=""> -->
+                <div class="checkbox-container">
+                    <input
+                        type="checkbox"
+                        id="ckb-two-screen"
+                        name="ckb_two_screen"
+                        checked
+                        onchange="onCheckedScreen()"
+                        class="checkbox"
+                    />
+                    <label class="label">Dùng 2 màn hình</label>
+                </div>
+                <div class="checkbox-container">
+                    <input
+                        type="checkbox"
+                        id="referee"
+                        name="referee"
+                        onchange="onReferee()"
+                        class="checkbox"
+                    />
+                    <label class="label">2 trên 3 trọng tài</label>
+                </div>
+                <!-- </div> -->
+            </div>
+            <div class="center-footer">
+                <button
+                    type="button"
+                    id="btn-start"
+                    class="btn btn-play"
+                    onclick="startTimer()"
+                >
+                    <img src="img/play-button.png" alt="Icon" />
+                </button>
+                <button
+                    type="button"
+                    id="btn-stop-caring"
+                    disabled
+                    onclick="pauseCaring()"
+                    title="Dừng săn sóc"
+                    class="btn btn-pause btn-stop-caring"
+                >
+                    <img src="img/pause.png" alt="Icon" />
+                </button>
+                <button
+                    type="button"
+                    id="btn-stop-considering"
+                    disabled
+                    title="Dừng xem xét"
+                    onclick="pauseConsidering()"
+                    class="btn btn-pause btn-stop-considering"
+                >
+                    <img src="img/eye.png" alt="Icon" />
+                </button>
+                <button
+                    type="button"
+                    id="btn-resume"
+                    disabled
+                    title="Tiếp tục"
+                    onclick="resumeRound()"
+                    class="btn btn-continue"
+                >
+                    <img src="img/reload.png" alt="Icon" />
+                </button>
+                <button
+                    type="button"
+                    id="btn-stop"
+                    disabled
+                    title="Dừng trận đấu"
+                    onclick="stopRound()"
+                    class="btn btn-stop"
+                >
+                    <img src="img/on-off-button.png" alt="Icon" />
+                </button>
+            </div>
+            <div class="right-footer">
+                <button type="button" id="btn-reg" class="btn btn-reg">
+                    <img
+                        class="margin-right-5"
+                        src="img/checklist.png"
+                        alt="Icon"
+                    />
+                    Reg.
+                </button>
+                <button
+                    type="button"
+                    id="btn-config"
+                    onclick="showConfigModal()"
+                    class="btn btn-config margin-left-4"
+                >
+                    <img
+                        class="margin-right-5"
+                        src="img/checklist.png"
+                        alt="Icon"
+                    />
+                    Config
+                </button>
+            </div>
+        </div>
+        <!-- Modal content -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <p>Reg.</p>
+                </div>
+                <div class="modal-body">
+                    <div class="reg-left">
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="weight_lever_modal">Hạng cân</label>
+                            </div>
+                            <div class="col-75">
+                                <input
+                                    type="text"
+                                    id="weight_lever_modal"
+                                    name="weight_lever"
+                                    placeholder="Hạng cân"
+                                />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="gender_modal">Giới tính</label>
+                            </div>
+                            <div class="col-75">
+                                <select id="gender_modal" name="gender">
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nu">Nữ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-25">
+                                <label for="match_number_modal">Trận</label>
+                            </div>
+                            <div class="col-75">
+                                <input
+                                    type="text"
+                                    id="match_number_modal"
+                                    name="match_number"
+                                    placeholder="Trận"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reg-blue">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="blue_fullname_modal"
+                                        >Tên VĐV</label
+                                    >
+                                </div>
+                                <div class="col-75">
+                                    <input
+                                        type="text"
+                                        id="blue_fullname_modal"
+                                        name="blue_fullname"
+                                        placeholder="Tên VĐV"
+                                    />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="blue_team_name_modal"
+                                        >Đoàn</label
+                                    >
+                                </div>
+                                <div class="col-75">
+                                    <input
+                                        type="text"
+                                        id="blue_team_name_modal"
+                                        name="blue_team_name"
+                                        placeholder="Đoàn..."
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reg-red">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="red_fullname_modal"
+                                        >Tên VĐV</label
+                                    >
+                                </div>
+                                <div class="col-75">
+                                    <input
+                                        type="text"
+                                        id="red_fullname_modal"
+                                        name="red_fullname"
+                                        placeholder="Tên VĐV"
+                                    />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-25">
+                                    <label for="red_team_name_modal"
+                                        >Đoàn</label
+                                    >
+                                </div>
+                                <div class="col-75">
+                                    <input
+                                        type="text"
+                                        id="red_team_name_modal"
+                                        name="red_team_name"
+                                        placeholder="Đoàn..."
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        onclick="onCloseRedModal()"
+                        id="btn-reg-ok"
+                        class="btn-ok"
+                    >
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal 2 -->
+        <div id="config-modal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span id="close-config-modal" class="close">&times;</span>
+                    <p>Config</p>
+                </div>
+                <div class="modal-body">
+                    <div class="config-left">
+                        <div id="config-keyboard">
+                            <table
+                                id="config-table"
+                                class="config-table"
+                                border="1"
+                            >
+                                <tr class="header-config-table">
+                                    <th rowspan="2"></th>
+                                    <th class="blue-color" colspan="3">Xanh</th>
+                                    <th rowspan="2"></th>
+                                    <th colspan="3" class="red-color">Đỏ</th>
+                                    <th rowspan="2" colspan="2">Điều khiển</th>
+                                </tr>
+                                <tr>
+                                    <th class="blue-color">Mặt</th>
+                                    <th class="blue-color">Bụng</th>
+                                    <th class="blue-color">Khó</th>
+
+                                    <th class="red-color">Mặt</th>
+                                    <th class="red-color">Bụng</th>
+                                    <th class="red-color">Khó</th>
+                                </tr>
+                                <tr>
+                                    <td>Trọng tài 1</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_3_1"
+                                            value="8"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_1_1"
+                                            value="7"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_2_1"
+                                            value="2"
+                                        />
+                                    </td>
+                                    <td>Trọng tài 1</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_3_1"
+                                            value="3"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_1_1"
+                                            value="4"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_2_1"
+                                            value="1"
+                                        />
+                                    </td>
+                                    <td>Bắt đầu/tiếp tục</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="start_and_continue_key"
+                                            value="0"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Trọng tài 2</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_3_2"
+                                            value="I"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_1_2"
+                                            value="U"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_2_2"
+                                            value="W"
+                                        />
+                                    </td>
+                                    <td>Trọng tài 2</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_3_2"
+                                            value="E"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_1_2"
+                                            value="R"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_2_2"
+                                            value="Q"
+                                        />
+                                    </td>
+                                    <td>Dừng săn sóc</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="stop_taking_care_key"
+                                            value="5"
+                                        />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Trọng tài 3</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_3_3"
+                                            value="K"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_1_3"
+                                            value="J"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_2_3"
+                                            value="S"
+                                        />
+                                    </td>
+                                    <td>Trọng tài 3</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_3_3"
+                                            value="D"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_1_3"
+                                            value="F"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_2_3"
+                                            value="A"
+                                        />
+                                    </td>
+                                    <td>Dừng xem xét</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="stop_considering_key"
+                                            value="9"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Trọng tài 4</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_3_4"
+                                            value=","
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_1_4"
+                                            value="M"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_2_4"
+                                            value="X"
+                                        />
+                                    </td>
+                                    <td>Trọng tài 4</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_3_4"
+                                            value="C"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_1_4"
+                                            value="V"
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_2_4"
+                                            value="Z"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Phạm lỗi</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_plus_gam_joem_key"
+                                            value="G"
+                                        />
+                                    </td>
+                                    <td>Hủy lỗi</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="blue_minus_gam_joem_key"
+                                            value="H"
+                                        />
+                                    </td>
+                                    <td>Phạm lỗi</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_plus_gam_joem_key"
+                                            value="B"
+                                        />
+                                    </td>
+                                    <td>Hủy lỗi</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_minus_gam_joem_key"
+                                            value="N"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cộng điểm</td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            disabled
+                                            name="blue_plus_deuk_key"
+                                            value="T"
+                                        />
+                                    </td>
+                                    <td>Trừ điểm</td>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            disabled
+                                            name="blue_minus_deuk_key"
+                                            value="Y"
+                                        />
+                                    </td>
+                                    <td>Cộng điểm</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_plus_deuk_key"
+                                            value="O"
+                                        />
+                                    </td>
+                                    <td>Trừ điểm</td>
+                                    <td>
+                                        <input
+                                            disabled
+                                            type="text"
+                                            name="red_minus_deuk_key"
+                                            value="P"
+                                        />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="config-right">
+                        <table style="width: 100%">
+                            <tr>
+                                <td>Thời gian 1 hiệp</td>
+                                <td>
+                                    <div
+                                        id="time-of-round"
+                                        class="time-of-round"
+                                    >
+                                        <select
+                                            name="time_of_round_select"
+                                            id="time-of-round-select"
+                                            class="time-of-round-select"
+                                        ></select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thời gian nghỉ giữa hiệp</td>
+                                <td>
+                                    <select
+                                        name="half_time_break"
+                                        id="half-time-break"
+                                    ></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thời gian khớp phím</td>
+                                <td>
+                                    <select
+                                        name="key-matching-time"
+                                        id="key-matching-time"
+                                    ></select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thời gian đặt lại hiệp</td>
+                                <td>
+                                    <div
+                                        id="time-reset-round"
+                                        class="time-reset-round"
+                                    >
+                                        <select
+                                            name="round_reset"
+                                            id="round-reset"
+                                        ></select>
+
+                                        <select
+                                            name="minute_reset_round"
+                                            id="minute-reset-round"
+                                        ></select>
+                                        :
+                                        <select
+                                            name="seconds_reset_round"
+                                            id="second-reset-round"
+                                        ></select>
+
+                                        <input
+                                            type="checkbox"
+                                            id="ckb-reset-round"
+                                            name="ckb_reset_round"
+                                            onchange="onCheckedResetRound()"
+                                            class="checkbox"
+                                        />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <button
+                                        type="button"
+                                        id="btn-start-match"
+                                        class="btn-start-match"
+                                        onclick="onStartNewMatch()"
+                                    >
+                                        Bắt đầu trận mới
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- <tr>
+                                <td></td>
+                                <td>
+                                    <audio
+                                        id="wavCountDown"
+                                        controls
+                                        style="display: hidden"
+                                    >
+                                        <source
+                                            src="file://C:/Windows/Media/chord.wav"
+                                            type="audio/wav"
+                                        />
+                                        Your browser does not support the audio
+                                        element.
+                                    </audio>
+                                </td>
+                            </tr> -->
+                            <!-- <tr>
+                                <td></td>
+                                <td>
+                                    <audio
+                                        id="wavDoneFight"
+                                        controls
+                                        style="display: hidden"
+                                    >
+                                        <source
+                                            src="file://C:/Windows/Media/tada.wav"
+                                            type="audio/wav"
+                                        />
+                                        Your browser does not support the audio
+                                        element.
+                                    </audio>
+                                </td>
+                            </tr> -->
+                            <!-- <tr>
+                                <td></td>
+                                <td>
+                                    <audio
+                                        id="wavDoneBreak"
+                                        controls
+                                        style="display: hidden"
+                                    >
+                                        <source
+                                            src="file://C:/Windows/Media/notify.wav"
+                                            type="audio/wav"
+                                        />
+                                        Your browser does not support the audio
+                                        element.
+                                    </audio>
+                                </td>
+                            </tr> -->
+                            <!-- <tr>
+                                <td>Đặt lại hiệp</td>
+                                <td>
+                                    <div
+                                        id="time-reset-round"
+                                        class="time-reset-round"
+                                    >
+                                        <input
+                                            type="text"
+                                            id="round-reset"
+                                            name="round_reset"
+                                            value=""
+                                        />
+                                    </div>
+                                </td>
+                            </tr> -->
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        id="btn-reg-ok"
+                        class="btn-ok"
+                        onclick="onSubmitConfigModal()"
+                    >
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>

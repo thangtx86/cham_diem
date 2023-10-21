@@ -1,0 +1,816 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+p {
+    margin: 0px;
+    padding: 0px;
+    color: white;
+}
+table {
+    width: 80%;
+}
+table th td {
+    /* border-collapse: collapse; */
+    border: 1px solid white;
+    text-align: left;
+    padding: 8px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th {
+    color: #e2e6e4;
+    background-color: #888d8d;
+}
+th:first-child {
+    background-color: transparent;
+}
+th:last-child {
+    background-color: #df6880;
+}
+td:first-child {
+    color: #e2e6e4;
+    background-color: #888d8d;
+}
+td {
+    background-color: #dde7e9;
+    text-align: center;
+}
+th td {
+    text-align: center;
+    align-content: center;
+}
+.header {
+    background-color: #110d18;
+    color: #fff;
+    text-align: center;
+    height: 50px;
+    padding: 10px;
+}
+
+.weight-title {
+    color: wheat;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.weight-level {
+    color: wheat;
+    font-size: 24px;
+}
+
+.content {
+    flex-grow: 1;
+    display: flex;
+}
+
+.left-content {
+    flex: 1;
+    position: relative;
+    background-color: #0050a7;
+}
+.left-content h1 {
+    /* font-size: 21px; */
+    color: white;
+    align-items: center;
+    text-align: center;
+}
+.score-section-first-athlete {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: #015cdc;
+    width: 60%;
+    float: right;
+    margin-right: 101px;
+    margin-top: 21px;
+    margin-bottom: 10px;
+    padding: 20px 0px 5px 24px;
+}
+.score-first-athlete {
+    text-align: center;
+    justify-content: center;
+    font-size: 180px;
+    color: white;
+}
+.gam-joem-title-first-athlete {
+    font-size: 24px;
+}
+
+.gam-joem-score-first-athlete {
+    font-size: 48px;
+}
+.score-summary-first-athlete {
+    clear: both;
+    display: flex;
+    justify-content: center;
+    margin-right: 50px;
+    /* margin-top: 100px; */
+}
+
+/* Định dạng button */
+.cal-point-first-athlete {
+    margin-top: 10px;
+    margin-left: 76px;
+    display: flex;
+    flex-direction: row;
+}
+.hand-cal-point-first-athlete {
+    display: flex;
+    flex-direction: column;
+}
+.armor-cal-point-first-athlete {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.custom-button-top-first-athlete {
+    border-radius: 4px;
+    width: 85px;
+    height: 35px;
+    background-color: #cad0dc;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.plus-first-athlete {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    color: #015cdc;
+    text-align: center;
+    font-size: 24px;
+}
+
+.image-part-top-first-athlete {
+    position: absolute;
+    bottom: -23px;
+    left: 22px;
+    right: 0;
+    width: 38px;
+    height: 38px;
+    background-size: cover;
+    z-index: 1;
+}
+.custom-button-bottom-first-athlete {
+    margin-top: 1px;
+    border-radius: 4px;
+    width: 85px;
+    height: 35px;
+    background-color: #cad0dc;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.minus-first-athlete {
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    color: #015cdc;
+    text-align: center;
+    font-size: 34px;
+    margin: 0 0;
+    padding: 0 0;
+}
+
+.image-part-bottom-first-athlete {
+    position: absolute;
+    top: -18px;
+    left: 22px;
+    right: 0;
+    width: 38px;
+    height: 38px;
+
+    background-size: cover;
+    z-index: 1;
+}
+
+/* Right Content */
+
+.right-content {
+    flex: 1;
+    position: relative;
+    background-color: #c50c2c;
+}
+
+.right-content h1 {
+    /* font-size: 21px; */
+    color: white;
+    align-items: center;
+    text-align: center;
+}
+.score-section-second-athlete {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    background-color: #ec012a;
+    width: 60%;
+    float: left;
+    margin-left: 100px;
+    margin-top: 21px;
+    margin-bottom: 10px;
+    padding: 20px 0px 5px 24px;
+}
+.score-second-athlete {
+    text-align: center;
+    justify-content: center;
+    font-size: 180px;
+    color: white;
+}
+.gam-jeom-section-second-athlete {
+    /* background-color: #0050a7; */
+    float: right;
+    width: 30%;
+}
+.gam-jeom-section-first-athlete {
+    width: 30%;
+}
+.gam-jeom-section-first-athlete p {
+    /* background-color: #0050a7; */
+    text-align: center;
+    /* width: 40%; */
+}
+.gam-jeom-section-second-athlete p {
+    text-align: center;
+}
+.gam-jeom-title-second-athlete {
+    font-size: 24px;
+}
+
+.gam-jeom-score-second-athlete {
+    font-size: 48px;
+}
+.score-summary-second-athlete {
+    clear: both;
+    display: flex;
+    justify-content: center;
+    margin-left: 43px;
+}
+
+.cal-point-second-athlete {
+    margin-top: 10px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    margin-left: 120px;
+}
+.hand-cal-point-second-athlete {
+    display: flex;
+    flex-direction: column;
+}
+.armor-cal-point-second-athlete {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.custom-button-top-second-athlete {
+    border-radius: 4px;
+    width: 85px;
+    height: 35px;
+    background-color: #cad0dc;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.plus-second-athlete {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    color: #c50c2c;
+    text-align: center;
+    font-size: 24px;
+}
+
+.image-part-top-second-athlete {
+    position: absolute;
+    bottom: -23px;
+    left: 22px;
+    right: 0;
+    width: 38px;
+    height: 38px;
+
+    background-size: cover;
+    z-index: 1;
+}
+.custom-button-bottom-second-athlete {
+    margin-top: 1px;
+    border-radius: 4px;
+    width: 85px;
+    height: 35px;
+    background-color: #cad0dc;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.minus-second-athlete {
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    color: #c50c2c;
+    text-align: center;
+    font-size: 34px;
+    margin: 0 0;
+    padding: 0 0;
+}
+
+.image-part-bottom-second-athlete {
+    position: absolute;
+    top: -18px;
+    left: 22px;
+    right: 0;
+    width: 38px;
+    height: 38px;
+
+    background-size: cover;
+    z-index: 1;
+}
+/* end right */
+.center-content {
+    flex: 1;
+    width: 200px;
+    background-color: #181715;
+    text-align: center;
+    position: absolute;
+    top: 141px;
+    left: 50%;
+    bottom: 88px;
+    transform: translateX(-50%);
+}
+.match-content {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+.match-content p {
+    color: white;
+    text-transform: uppercase;
+    font-size: 32px;
+}
+.content-result {
+    padding-top: 32px;
+    padding-bottom: 32px;
+    background-color: #e0df5f;
+}
+.content-result p {
+    color: red;
+    font-size: 62px;
+}
+.round-content {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+.round-content p {
+    color: white;
+    font-size: 32px;
+    text-transform: uppercase;
+}
+.status-content {
+    position: absolute;
+    display: flex;
+    right: 0;
+    left: 0;
+    justify-content: center;
+    /* bottom: 40px; */
+}
+.left-status {
+    background-color: #0050a7;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    padding: 12px 24px 12px 24px;
+}
+.left-status span {
+    font-size: 24px;
+    text-transform: uppercase;
+    color: white;
+}
+.right-status {
+    margin-left: 1px;
+    background-color: #c50c2c;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 12px 24px 12px 24px;
+}
+.right-status span {
+    color: white;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #192231;
+    color: #fff;
+    /* text-align: center; */
+    padding: 10px;
+}
+.left-footer {
+    display: flex;
+}
+.center-footer {
+    display: flex;
+    justify-content: center;
+}
+.right-footer {
+    display: flex;
+}
+.btn {
+    background-color: hsl(223, 15%, 28%); /* Màu nền màu vàng */
+    border-radius: 4px;
+    padding: 8px 16px; /* Kích thước nút */
+    border: none; /* Loại bỏ đường viền */
+    color: #9da1ac; /* Màu chữ trắng */
+    font-size: 12px; /* Kích thước chữ */
+    cursor: pointer; /* Biến đổi con trỏ thành bàn tay khi di chuột qua nút */
+    display: flex; /* Sử dụng display:flex để sắp xếp hình ảnh và văn bản cùng hàng */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: flex-start; /* Căn trái để hình ảnh ở bên trái */
+}
+.btn img {
+    width: 18px;
+    height: 18px;
+}
+.margin-right-5 {
+    margin-right: 5px;
+}
+.margin-left-4 {
+    margin-left: 4px;
+}
+.btn-injury {
+    margin-left: 4px;
+}
+
+.btn-play {
+    margin-left: 4px;
+}
+.btn-pause {
+    margin-left: 4px;
+}
+.btn-continue {
+    margin-left: 4px;
+}
+.btn-stop {
+    margin-left: 4px;
+}
+
+/* Modal */
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: absolute; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s;
+}
+
+/* Modal Content */
+.modal-content {
+    position: fixed;
+    bottom: 0;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s;
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 0 0;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 11px;
+    background-color: #01388c;
+    color: white;
+}
+.modal-header p {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.modal-body {
+    padding: 2px;
+
+    display: flex;
+    flex-grow: 1;
+}
+
+.modal-footer {
+    color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0;
+    }
+    to {
+        bottom: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0;
+    }
+    to {
+        bottom: 0;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.reg-first-athlete {
+    flex: 1;
+}
+.reg-second-athlete {
+    flex: 1;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+input[type='text'],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+.container {
+    padding: 20px;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .col-25,
+    .col-75,
+    input[type='submit'] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+.btn-ok {
+    background-color: #04aa6d;
+    color: white;
+    padding: 12px 48px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    margin-right: 16px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.btn-ok :hover {
+    background-color: #45a049;
+}
+/* End Modal */
+
+/* Preview  */
+.athlete-info {
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+.score-of-error {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #192231;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+.score-of-first-athlete-preview {
+    justify-content: center;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+    align-content: center;
+}
+.score-of-first-athlete-preview p {
+    margin-top: 80px;
+    font-size: 150px;
+
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+}
+.athlete-name-first-athlete-preview {
+    color: white;
+    align-items: center;
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 12px;
+    padding: 0;
+}
+
+.first-team-preview {
+    color: white;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.error-section {
+    float: left;
+    margin-left: 32px;
+}
+
+.error-section p:first-child {
+    font-size: 28px;
+}
+.white-color {
+    color: white;
+}
+.score-of-error {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #192231;
+    color: #fff;
+    position: absolute;
+    text-align: end;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+}
+.error-section p:last-child {
+    color: white;
+    font-size: 32px;
+}
+
+/* Second */
+
+.athlete-info {
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+.score-of-error {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #192231;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+.score-of-second-athlete-preview {
+    justify-content: center;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+    align-content: center;
+}
+.score-of-second-athlete-preview p {
+    margin-top: 80px;
+    font-size: 150px;
+
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+}
+.athlete-name-second-athlete-preview {
+    color: white;
+    align-items: center;
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 12px;
+    padding: 0;
+}
+
+.second-team-preview {
+    color: white;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.second-error-section p:first-child {
+    font-size: 28px;
+}
+.second-score-of-error {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    flex-direction: row;
+    background-color: #192231;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+}
+.second-error-section {
+    float: right;
+    margin-right: 32px;
+}
+.second-error-section p:last-child {
+    font-size: 32px;
+}
+
+.content-title-break {
+    color: red;
+    font-size: 24px;
+}

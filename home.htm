@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Kết Quả</title>
+        <link
+            href="https://fonts.googleapis.com/css?family=Roboto"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link rel="stylesheet" type="text/css" href="home.css" />
+    </head>
+    <body onload="onLoadData()">
+        <div class="header">
+            <p class="weight-level" id="weight-level">Hạng Cân - Giới Tính</p>
+        </div>
+
+        <div class="content">
+            <div class="left-content">
+                <div class="athlete-info">
+                    <h1
+                        id="athlete-name-first-athlete-preview"
+                        class="athlete-name-first-athlete-preview"
+                    >
+                        Tên VDV
+                    </h1>
+                    <h3 id="first-team-preview" class="first-team-preview">
+                        Đoàn
+                    </h3>
+                </div>
+                <div class="score-of-first-athlete-preview">
+                    <p id="deuk-joem-blue">0</p>
+                </div>
+                <div class="score-of-error">
+                    <div class="error-section">
+                        <p class="white-color">LỖI</p>
+                        <p id="gam-joem-blue" class="white-color">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="right-content">
+                <div class="athlete-info">
+                    <h1
+                        id="athlete-name-second-athlete-preview"
+                        class="athlete-name-second-athlete-preview"
+                    >
+                        Tên VDV
+                    </h1>
+                    <h3 id="second-team-preview" class="second-team-preview">
+                        Đoàn
+                    </h3>
+                </div>
+                <div class="score-of-second-athlete-preview">
+                    <p id="deuk-joem-red">0</p>
+                </div>
+                <div class="second-score-of-error">
+                    <div class="second-error-section">
+                        <p>LỖI</p>
+                        <p id="gam-joem-red">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="center-content">
+                <div class="match-content">
+                    <p>Trận</p>
+                    <br />
+                    <p id="match_number" class="match_number">1</p>
+                </div>
+                <div class="content-result">
+                    <span
+                        id="content-title-break-preview"
+                        class="content-title-break"
+                    >
+                    </span>
+                    <p id="time-of-round">00:00</p>
+                </div>
+                <div class="round-content">
+                    <p>Hiệp</p>
+                    <br />
+                    <p id="current-round">1</p>
+                </div>
+                <div class="status-content">
+                    <div class="left-status">
+                        <span id="left-status">0</span>
+                    </div>
+                    <div class="right-status">
+                        <span id="right-status">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="home.js"></script>
+    </body>
+</html>
