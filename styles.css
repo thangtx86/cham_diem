@@ -303,6 +303,17 @@ th td {
     font-size: 24px;
 }
 
+.plus-red-referee {
+    color: #c50c2c;
+    text-align: center;
+    font-size: 18px;
+}
+.plus-blue-referee {
+    color: #015cdc;
+    text-align: center;
+    font-size: 18px;
+}
+
 .image-part-top-red {
     position: absolute;
     bottom: -23px;
@@ -358,23 +369,23 @@ th td {
     transform: translateX(-50%);
 }
 .match-content {
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 22px;
+    padding-bottom: 22px;
 }
 .match-content p {
     color: white;
     text-transform: uppercase;
-    font-size: 32px;
+    font-size: 28px;
 }
 .content-result {
-    padding-top: 32px;
-    padding-bottom: 32px;
+    padding-top: 28px;
+    padding-bottom: 28px;
     background-color: #e0df5f;
 }
 .content-result-break-time {
     display: none;
-    padding-top: 32px;
-    padding-bottom: 32px;
+    padding-top: 28px;
+    padding-bottom: 28px;
     background-color: #e0df5f;
 }
 
@@ -391,12 +402,12 @@ th td {
     font-size: 62px;
 }
 .round-content {
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding-top: 22px;
+    padding-bottom: 22px;
 }
 .round-content p {
     color: white;
-    font-size: 32px;
+    font-size: 28px;
     text-transform: uppercase;
 }
 .status-content {
@@ -413,13 +424,21 @@ th td {
     right: 0;
     left: 0;
     justify-content: center;
+    bottom: 110px;
+}
+.status-referee-minus {
+    position: absolute;
+    display: flex;
+    right: 0;
+    left: 0;
+    justify-content: center;
     bottom: 80px;
 }
 
 .custom-button-top-referee {
     border-radius: 4px;
-    width: 45px;
-    height: 35px;
+    width: 80px;
+    height: 25px;
     background-color: #cad0dc;
     border: none;
     cursor: pointer;

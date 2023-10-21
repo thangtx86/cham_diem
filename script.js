@@ -202,10 +202,10 @@ const initializeGame = () => {
     initTimeOfRound(secondResetRoundSelect, 0, 59);
     initWinStatus(blueWinStatus, redWinStatus);
 
-    let isTwoScreen = ckbTwoScreen.checked;
-    if (isTwoScreen) {
-        openOtherWindows();
-    }
+    // let isTwoScreen = ckbTwoScreen.checked;
+    // if (isTwoScreen) {
+    //     openOtherWindows();
+    // }
 };
 
 const initWinStatus = (left, right) => {
@@ -1329,6 +1329,36 @@ const onRefereePlusForBlue = () => {
 const onRefereePlusForRed = () => {
     if (isRefereePlus) {
         ++redWinStatus;
+        initWinStatus(blueWinStatus, redWinStatus);
+        let arr = {
+            blueWinStatus: blueWinStatus,
+            redWinStatus: redWinStatus,
+            currentRound: pop
+        };
+        // localStorage.setItem('deukGam', JSON.stringify(arr));
+        sendMessage('deukGam', arr);
+    } else {
+        alert('Chức năng này chỉ hoạt động khi hai đội bằng điểm nhau');
+    }
+};
+const onRefereeMinusForBlue = () => {
+    if (isRefereePlus) {
+        --blueWinStatus;
+        initWinStatus(blueWinStatus, redWinStatus);
+        let arr = {
+            blueWinStatus: blueWinStatus,
+            redWinStatus: redWinStatus,
+            currentRound: pop
+        };
+        // localStorage.setItem('deukGam', JSON.stringify(arr));
+        sendMessage('deukGam', arr);
+    } else {
+        alert('Chức năng này chỉ hoạt động khi hai đội bằng điểm nhau');
+    }
+};
+const onRefereeMinusForRed = () => {
+    if (isRefereePlus) {
+        --redWinStatus;
         initWinStatus(blueWinStatus, redWinStatus);
         let arr = {
             blueWinStatus: blueWinStatus,
