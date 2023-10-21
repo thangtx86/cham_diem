@@ -537,7 +537,7 @@ const stopRound = () => {
     // displayHalfTimeBreak(1);
 };
 const stopTimer = () => {
-    btnStart.disabled = false;
+    btnStart.disabled = true;
     btnStopCaring.disabled = true;
     btnStopConsidering.disabled = true;
     btnStop.disabled = true;
@@ -571,6 +571,7 @@ const resumeTimer = () => {
 
 const startTimerBreak = () => {
     timerIntervalBreak = setInterval(updateTimerBreak, 1000);
+    isRefereePlus = true;
 };
 let timerIntervalStopCaring = null;
 const startTimerStopCaring = () => {
@@ -588,6 +589,7 @@ const pauseTimerBreak = () => {
     clearInterval(timerIntervalBreak);
 
     displayHalfTimeBreak(2);
+    isRefereePlus = false;
 };
 
 const stopTimerBreak = () => {
@@ -644,7 +646,6 @@ const updateStatusOfRound = () => {
         ) {
             ++blueWinStatus;
         } else {
-            isRefereePlus = true;
         }
     }
 
@@ -738,7 +739,7 @@ const updateStatusOfRound = () => {
         }
 
         currentRound++;
-        isRefereePlus = false;
+        // isRefereePlus = false;
     }
 
     //reset score for each team
@@ -1323,7 +1324,7 @@ const onRefereePlusForBlue = () => {
         // localStorage.setItem('deukGam', JSON.stringify(arr));
         sendMessage('deukGam', arr);
     } else {
-        alert('Chức năng này chỉ hoạt động khi hai đội bằng điểm nhau');
+        alert('Chức năng này chỉ hoạt động khi đang nghỉ giữa hiệp');
     }
 };
 const onRefereePlusForRed = () => {
@@ -1338,7 +1339,7 @@ const onRefereePlusForRed = () => {
         // localStorage.setItem('deukGam', JSON.stringify(arr));
         sendMessage('deukGam', arr);
     } else {
-        alert('Chức năng này chỉ hoạt động khi hai đội bằng điểm nhau');
+        alert('Chức năng này chỉ hoạt động khi đang nghỉ giữa hiệp');
     }
 };
 const onRefereeMinusForBlue = () => {
@@ -1353,7 +1354,7 @@ const onRefereeMinusForBlue = () => {
         // localStorage.setItem('deukGam', JSON.stringify(arr));
         sendMessage('deukGam', arr);
     } else {
-        alert('Chức năng này chỉ hoạt động khi hai đội bằng điểm nhau');
+        alert('Chức năng này chỉ hoạt động khi đang nghỉ giữa hiệp');
     }
 };
 const onRefereeMinusForRed = () => {
@@ -1368,6 +1369,6 @@ const onRefereeMinusForRed = () => {
         // localStorage.setItem('deukGam', JSON.stringify(arr));
         sendMessage('deukGam', arr);
     } else {
-        alert('Chức năng này chỉ hoạt động khi hai đội bằng điểm nhau');
+        alert('Chức năng này chỉ hoạt động khi đang nghỉ giữa hiệp');
     }
 };
