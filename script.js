@@ -202,10 +202,10 @@ const initializeGame = () => {
     initTimeOfRound(secondResetRoundSelect, 0, 59);
     initWinStatus(blueWinStatus, redWinStatus);
 
-    // let isTwoScreen = ckbTwoScreen.checked;
-    // if (isTwoScreen) {
-    //     openOtherWindows();
-    // }
+    let isTwoScreen = ckbTwoScreen.checked;
+    if (isTwoScreen) {
+        openOtherWindows();
+    }
 };
 
 const initWinStatus = (left, right) => {
