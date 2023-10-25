@@ -219,114 +219,81 @@ const extractMMSS = (inputString) => {
 };
 
 const onPlusScoreForBlue = () => {
-    if (isTimerRunning) {
-        scoreOfBlue++;
-        txtScoreBlue.textContent = scoreOfBlue;
-        sendMessage('score_blue', scoreOfBlue);
-        //     console.log(scoreOfBlue);
-    } else {
-        alert('Trận đấu chưa bắt đầu hoặc đang bị tạm dừng...');
-    }
+    scoreOfBlue++;
+    txtScoreBlue.textContent = scoreOfBlue;
+    sendMessage('score_blue', scoreOfBlue);
+    //     console.log(scoreOfBlue);
 };
 
 const onMinusScoreForBlue = () => {
-    if (isTimerRunning) {
-        if (scoreOfBlue > 0) {
-            scoreOfBlue--;
-            txtScoreBlue.textContent = scoreOfBlue;
-            sendMessage('score_blue', scoreOfBlue);
-        }
-    } else {
-        alert('Trận đấu chưa bắt đầu hoặc đang bị tạm dừng...');
+    if (scoreOfBlue > 0) {
+        scoreOfBlue--;
+        txtScoreBlue.textContent = scoreOfBlue;
+        sendMessage('score_blue', scoreOfBlue);
     }
 };
 
 const onPlusScoreForRed = () => {
-    if (isTimerRunning) {
-        scoreOfRed++;
-
-        txtScoreRed.textContent = scoreOfRed;
-        sendMessage('score_red', scoreOfRed);
-    } else {
-        alert('Trận đấu chưa bắt đầu hoặc đang bị tạm dừng...');
-    }
+    scoreOfRed++;
+    txtScoreRed.textContent = scoreOfRed;
+    sendMessage('score_red', scoreOfRed);
 };
 
 const onMinusScoreForRed = () => {
-    if (isTimerRunning) {
-        if (scoreOfRed > 0) {
-            scoreOfRed--;
-            txtScoreRed.textContent = scoreOfRed;
-            sendMessage('score_red', scoreOfRed);
-        }
-    } else {
-        alert('Trận đấu chưa bắt đầu hoặc đang bị tạm dừng...');
+    if (scoreOfRed > 0) {
+        scoreOfRed--;
+        txtScoreRed.textContent = scoreOfRed;
+        sendMessage('score_red', scoreOfRed);
     }
 };
 
 //GAM-JOEM
 const onPlusGamJoemBlue = () => {
-    if (isTimerRunning) {
-        gamJoemBlue++;
-        scoreOfRed++;
+    gamJoemBlue++;
+    scoreOfRed++;
+    txtGamJoemBlue.textContent = gamJoemBlue;
+    txtScoreRed.textContent = scoreOfRed;
+    sendMessage('gam_joem_blue', gamJoemBlue);
+    sendMessage('score_red', scoreOfRed);
+};
+
+const onMinusGamJoemBlue = () => {
+    if (gamJoemBlue > 0) {
+        gamJoemBlue--;
+        scoreOfRed--;
         txtGamJoemBlue.textContent = gamJoemBlue;
         txtScoreRed.textContent = scoreOfRed;
         sendMessage('gam_joem_blue', gamJoemBlue);
         sendMessage('score_red', scoreOfRed);
-    } else {
-        alert('Trận đấu chưa bắt đầu hoặc đang bị tạm dừng...');
-    }
-};
-
-const onMinusGamJoemBlue = () => {
-    if (isTimerRunning) {
-        if (gamJoemBlue > 0) {
-            gamJoemBlue--;
-            scoreOfRed--;
-            txtGamJoemBlue.textContent = gamJoemBlue;
-            txtScoreRed.textContent = scoreOfRed;
-            sendMessage('gam_joem_blue', gamJoemBlue);
-            sendMessage('score_red', scoreOfRed);
-        }
-    } else {
-        alert('Trận đấu chưa bắt đầu hoặc đang bị tạm dừng...');
     }
 };
 
 const onPlusGamJoemRed = () => {
-    if (isTimerRunning) {
-        gamJoemRed++;
-        scoreOfBlue++;
+    gamJoemRed++;
+    scoreOfBlue++;
+    txtGamJoemRed.textContent = gamJoemRed;
+    txtScoreBlue.textContent = scoreOfBlue;
+    sendMessage('gam_joem_red', gamJoemRed);
+    sendMessage('score_blue', scoreOfBlue);
+};
+
+const onMinusGamJoemRed = () => {
+    if (gamJoemRed > 0) {
+        gamJoemRed--;
+        scoreOfBlue--;
         txtGamJoemRed.textContent = gamJoemRed;
         txtScoreBlue.textContent = scoreOfBlue;
         sendMessage('gam_joem_red', gamJoemRed);
         sendMessage('score_blue', scoreOfBlue);
-    } else {
-        alert('Trận đấu chưa bắt đầu hoặc đang bị tạm dừng...');
-    }
-};
-
-const onMinusGamJoemRed = () => {
-    if (isTimerRunning) {
-        if (gamJoemRed > 0) {
-            gamJoemRed--;
-            scoreOfBlue--;
-            txtGamJoemRed.textContent = gamJoemRed;
-            txtScoreBlue.textContent = scoreOfBlue;
-            sendMessage('gam_joem_red', gamJoemRed);
-            sendMessage('score_blue', scoreOfBlue);
-        }
-    } else {
-        alert('Trận đấu chưa bắt đầu hoặc đang bị tạm dừng...');
     }
 };
 let isStopCaringFlag = false;
 let isStopConsideringFlag = false;
+let isStartKey = false;
 const handleKeyEvent = (event, isKeyDown) => {
-    if (!isTimerRunning) {
-        return;
-    }
-
+    // if (!isTimerRunning) {
+    //     return;
+    // }
     const currentTime = Date.now();
     const timeSinceLastKeyPress = currentTime - lastKeyPressTime;
     const key = event.key.toUpperCase();
@@ -360,12 +327,30 @@ const handleKeyEvent = (event, isKeyDown) => {
                 onMinusGamJoemRed();
                 break;
             case keyDeukGamJoem.start_and_continue_key:
-                startTimer();
+                if (isStartKey == false) {
+                    console.log('Start');
+
+                    isStartKey = true;
+                    stopRound();
+                    isTimerRunning = true;
+                    // isTimerRunning = true;
+                } else {
+                    console.log('End Start');
+                    isStartKey = false;
+                    isTimerRunning = false;
+                    startTimer();
+                }
+
                 break;
             case keyDeukGamJoem.stop_taking_care_key:
+                if (isStopConsideringFlag == true) {
+                    return;
+                }
                 // if (isStopConsideringFlag == false) {
                 if (isStopCaringFlag == false) {
+                    isStopCaringFlag = true;
                     pauseCaring();
+                    isTimerRunning = true;
                     console.log('ON');
                     const minutess = Math.floor(timeStopCaring / 60);
                     const secondss = timeStopCaring % 60;
@@ -378,8 +363,9 @@ const handleKeyEvent = (event, isKeyDown) => {
                     };
                     sendMessage('timeArr', time_arr);
                     // btnResume.disabled = true;
-                    isStopCaringFlag = true;
                 } else {
+                    isStopCaringFlag = false;
+                    isTimerRunning = false;
                     resumeRound();
                     console.log('OFF');
                     const minutesss = Math.floor(timeLeft / 60);
@@ -392,7 +378,7 @@ const handleKeyEvent = (event, isKeyDown) => {
                         timer: _times
                     };
                     sendMessage('timeArr', time_arr);
-                    isStopCaringFlag = false;
+
                     // btnResume.disabled = false;
                 }
                 // } else {
@@ -401,10 +387,16 @@ const handleKeyEvent = (event, isKeyDown) => {
 
                 break;
             case keyDeukGamJoem.stop_considering_key:
+                if (isStopCaringFlag == true) {
+                    return;
+                }
                 // if (isStopCaringFlag == false) {
                 if (isStopConsideringFlag == false) {
                     // btnResume.disabled = true;
+                    isStopConsideringFlag = true;
+
                     pauseConsidering();
+                    isTimerRunning = true;
                     const minutes3 = Math.floor(0 / 60);
                     const seconds3 = 0 % 60;
                     var _time3 = `${minutes3 < 10 ? '0' : ''}${minutes3}:${
@@ -415,8 +407,10 @@ const handleKeyEvent = (event, isKeyDown) => {
                         timer: _time3
                     };
                     sendMessage('timeArr', time_arr3);
-                    isStopConsideringFlag = true;
                 } else {
+                    // isStopCaringFlag = false;
+                    isStopConsideringFlag = false;
+                    isTimerRunning = false;
                     resumeRound();
 
                     const minutesss2 = Math.floor(timeLeft / 60);
@@ -429,8 +423,7 @@ const handleKeyEvent = (event, isKeyDown) => {
                         timer: _times2
                     };
                     sendMessage('timeArr', time_arr2);
-                    isStopCaringFlag = false;
-                    isStopConsideringFlag = false;
+
                     // btnResume.disabled = false;
                 }
 
@@ -706,16 +699,16 @@ const updateStatusOfRound = () => {
             btnResume.disabled = true;
             txtNumberOfRound.textContent = currentRound;
             clearInterval(timerIntervalBreak);
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            let _time = `${minutes < 10 ? '0' : ''}${minutes}:${
-                seconds < 10 ? '0' : ''
-            }${seconds}`;
-            let time_arr = {
+            const minutes2 = Math.floor(timeLeft / 60);
+            const seconds2 = timeLeft % 60;
+            let _time2 = `${minutes2 < 10 ? '0' : ''}${minutes2}:${
+                seconds2 < 10 ? '0' : ''
+            }${seconds2}`;
+            let time_arr2 = {
                 title: '',
-                timer: _time
+                timer: _time2
             };
-            sendMessage('timeArr', time_arr);
+            sendMessage('timeArr', time_arr2);
         }
         if (currentRound == 4) {
             displayHalfTimeBreak(1);
@@ -961,6 +954,7 @@ const initTimeOfRound = (selectElement, start, end) => {
 };
 
 const initHalfTimeBreak = (selectElement, options, defaultValue) => {
+    selectElement.innerHTML = '';
     options.forEach((option) => {
         const optionElement = document.createElement('option');
         optionElement.value = option.value;
@@ -1237,8 +1231,8 @@ const onStartNewMatch = () => {
     // txtTeamRed.textContent = 'Hạng Cân - Giới Tính';
 
     txtWeightLevel.textContent = ' Hạng Cân - Giới Tính';
-    ckbReferee.checked = false;
-    isReferee = false;
+    ckbReferee.checked = true;
+    isReferee = true;
     isResetRound = false;
 
     blueWinStatus = 0;
