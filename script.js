@@ -1073,6 +1073,7 @@ const onSubmitConfigModal = () => {
         timer: _time
     };
     sendMessage('timeArr', time_arr);
+    isPauseKeyEvent = false;
 };
 const clearKeys = (keyCombinationsParams) => {
     for (const combination of keyCombinationsParams) {
