@@ -971,6 +971,7 @@ const getConfigValues = () =>
     }, {});
 
 const initTimeOfRound = (selectElement, start, end) => {
+    selectElement.innerHTML = '';
     for (let i = start; i <= end; i++) {
         const option = document.createElement('option');
         option.value = i < 10 ? `0${i}` : `${i}`;
