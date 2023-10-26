@@ -84,6 +84,7 @@ let keyDeukGamJoem = {
 let timer;
 
 let isPaused = false;
+let isTimerBreak = false;
 let secondsRemaining = 0;
 // save value for modal
 let regResult = {};
@@ -290,10 +291,15 @@ const onMinusGamJoemRed = () => {
 let isStopCaringFlag = false;
 let isStopConsideringFlag = false;
 let isStartKey = false;
+let isPauseKeyEvent = false;
 const handleKeyEvent = (event, isKeyDown) => {
     // if (!isTimerRunning) {
     //     return;
     // }
+    console.log('KeyEvent: ' + isPauseKeyEvent);
+    if (isPauseKeyEvent == true) {
+        return;
+    }
     const currentTime = Date.now();
     const timeSinceLastKeyPress = currentTime - lastKeyPressTime;
     const key = event.key.toUpperCase();
@@ -331,21 +337,23 @@ const handleKeyEvent = (event, isKeyDown) => {
                     console.log('Start');
 
                     isStartKey = true;
-                    stopRound();
+                    startTimer();
+
                     isTimerRunning = true;
                     // isTimerRunning = true;
                 } else {
                     console.log('End Start');
                     isStartKey = false;
                     isTimerRunning = false;
-                    startTimer();
+                    stopRound();
                 }
 
                 break;
             case keyDeukGamJoem.stop_taking_care_key:
-                if (isStopConsideringFlag == true) {
+                if (isStopConsideringFlag == true || isTimerBreak == true) {
                     return;
                 }
+
                 // if (isStopConsideringFlag == false) {
                 if (isStopCaringFlag == false) {
                     isStopCaringFlag = true;
@@ -387,9 +395,13 @@ const handleKeyEvent = (event, isKeyDown) => {
 
                 break;
             case keyDeukGamJoem.stop_considering_key:
-                if (isStopCaringFlag == true) {
+                console.log(
+                    '1: ---: ' + isStopCaringFlag + ' --- ' + isTimerBreak
+                );
+                if (isStopCaringFlag == true || isTimerBreak == true) {
                     return;
                 }
+
                 // if (isStopCaringFlag == false) {
                 if (isStopConsideringFlag == false) {
                     // btnResume.disabled = true;
@@ -472,6 +484,7 @@ const startTimer = () => {
         btnStop.disabled = false;
         btnResume.disabled = true;
         displayHalfTimeBreak(1);
+        isStartKey = true;
         if (timerIntervalBreak != null) {
             stopTimerBreak();
         }
@@ -522,6 +535,7 @@ const pauseTimer = () => {
     displayHalfTimeBreak(1);
 };
 const stopRound = () => {
+    isTimerBreak = false;
     displayHalfTimeBreak(2);
     stopTimer();
     startTimerBreak();
@@ -583,10 +597,12 @@ const pauseTimerBreak = () => {
 
     displayHalfTimeBreak(2);
     isRefereePlus = false;
+    isTimerBreak = false;
 };
 
 const stopTimerBreak = () => {
     clearInterval(timerIntervalBreak);
+    isTimerBreak = false;
     // clearInterval(timeStopCaring);
     // clearInterval(timeStopConsidering);
     halfTimeBreak = halfTimeBreakTemp;
@@ -811,6 +827,8 @@ const updateTimer = () => {
 };
 
 const updateTimerBreak = () => {
+    console.log('Timer break running...');
+    isTimerBreak = true;
     const minutes = Math.floor(halfTimeBreak / 60);
     const seconds = halfTimeBreak % 60;
     var _time = `${minutes < 10 ? '0' : ''}${minutes}:${
@@ -857,6 +875,7 @@ const updateTimerStopCaring = () => {
 };
 let timeStopConsidering = 0;
 const updateTimerStopConsidering = () => {
+    console.log('Stop considering is running');
     const minutes = Math.floor(timeStopConsidering / 60);
     const seconds = timeStopConsidering % 60;
     var _time = `${minutes < 10 ? '0' : ''}${minutes}:${
@@ -879,28 +898,34 @@ const updateTimerStopConsidering = () => {
 
 // When the user clicks the button, open the modal
 btnReg.onclick = function () {
+    isPauseKeyEvent = true;
     modal.style.display = 'block';
 };
 
 const showConfigModal = () => {
+    isPauseKeyEvent = true;
     configModal.style.display = 'block';
 };
 const closeConfigModal = () => {
+    isPauseKeyEvent = false;
     configModal.style.display = 'none';
 };
 
 btnConfigModalClose.onclick = function () {
+    isPauseKeyEvent = false;
     closeConfigModal();
 };
 // When the user clicks on <span> (x), close the modal
 btnModalClose.onclick = function () {
     modal.style.display = 'none';
+    isPauseKeyEvent = false;
 };
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = 'none';
+        isPauseKeyEvent = false;
     }
 };
 // Event get all value of Modal
@@ -924,6 +949,7 @@ const onCloseRedModal = () => {
     txtTeamRed.textContent = regResult.red_team_name;
     // close modal
     modal.style.display = 'none';
+    isPauseKeyEvent = false;
 };
 const getRegValues = () =>
     [...document.querySelectorAll('#myModal input, #myModal select')].reduce(
