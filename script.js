@@ -61,7 +61,7 @@ let roundResetArr = [
     { value: 3, label: '3' },
     { value: 4, label: '4' }
 ];
-
+let timeMatchingOption = 1;
 const keyMatchingTimeOptions = [
     { value: 1, label: '1 giây' },
     { value: 1.5, label: '1.5 giây' },
@@ -194,7 +194,11 @@ const initializeGame = () => {
     // initTimeOfRound(minuteOfRoundSelect, parseInt(minute, 10), 59);
     // initTimeOfRound(secondOfRoundSelect, parseInt(seconds, 10), 59);
     initHalfTimeBreak(halfTimeBreakSelect, halfTimeBreakOptions, halfTimeBreak);
-    initHalfTimeBreak(keyMatchingTimeSelect, keyMatchingTimeOptions, 1);
+    initHalfTimeBreak(
+        keyMatchingTimeSelect,
+        keyMatchingTimeOptions,
+        timeMatchingOption
+    );
     initHalfTimeBreak(roundResetSelect, roundResetArr, 1);
 
     initHalfTimeBreak(ckbTimeOfRoundSelect, timeOfRoundArr, 15);
@@ -300,6 +304,7 @@ const handleKeyEvent = (event, isKeyDown) => {
     if (isPauseKeyEvent == true) {
         return;
     }
+
     const currentTime = Date.now();
     const timeSinceLastKeyPress = currentTime - lastKeyPressTime;
     const key = event.key.toUpperCase();
@@ -307,6 +312,7 @@ const handleKeyEvent = (event, isKeyDown) => {
     if (isKeyDown) {
         keysPressed.add(key);
         console.log(key);
+
         switch (key) {
             case keyDeukGamJoem.blue_minus_deuk_key:
                 onMinusScoreForBlue();
@@ -444,6 +450,7 @@ const handleKeyEvent = (event, isKeyDown) => {
                 break;
         }
     } else {
+        lastKeyPressTime = currentTime;
         keysPressed.delete(key);
     }
 
@@ -460,13 +467,17 @@ const handleKeyEvent = (event, isKeyDown) => {
         }
         if (pressedKeysInCombination.length >= minKey) {
             if (combination.team === 'red') {
-                scoreOfRed += combination.score;
-                txtScoreRed.textContent = scoreOfRed;
-                sendMessage('score_red', scoreOfRed);
+                if (timeSinceLastKeyPress <= timeMatchingOption) {
+                    scoreOfRed += combination.score;
+                    txtScoreRed.textContent = scoreOfRed;
+                    sendMessage('score_red', scoreOfRed);
+                }
             } else {
-                scoreOfBlue += combination.score;
-                txtScoreBlue.textContent = scoreOfBlue;
-                sendMessage('score_blue', scoreOfBlue);
+                if (timeSinceLastKeyPress <= timeMatchingOption) {
+                    scoreOfBlue += combination.score;
+                    txtScoreBlue.textContent = scoreOfBlue;
+                    sendMessage('score_blue', scoreOfBlue);
+                }
             }
             keysPressed.clear();
         }
@@ -1024,6 +1035,10 @@ const convertMinutesToSeconds = (timeString) => {
     return totalSeconds;
 };
 
+const secondsToMilliseconds = (seconds) => {
+    return seconds * 1000;
+};
+
 const onSubmitConfigModal = () => {
     isConfig = true;
     let values = getConfigValues();
@@ -1051,6 +1066,8 @@ const onSubmitConfigModal = () => {
     txtTimer.textContent = formatTimeAsMMSS(timeLeft);
 
     halfTimeBreak = values.half_time_break;
+    timeMatchingOption = secondsToMilliseconds(values.key_matching_time);
+
     timeEachRound = parseInt(values.time_of_round_select, 10);
     // halfTimeBreakEnd = timeLeft - halfTimeBreak;
     // localStorage.setItem(
@@ -1184,7 +1201,11 @@ const onStartNewMatch = () => {
     // initTimeOfRound(minuteOfRoundSelect, parseInt(minute, 10), 59);
     // initTimeOfRound(secondOfRoundSelect, parseInt(seconds, 10), 59);
     initHalfTimeBreak(halfTimeBreakSelect, halfTimeBreakOptions, halfTimeBreak);
-    initHalfTimeBreak(keyMatchingTimeSelect, keyMatchingTimeOptions, 1);
+    initHalfTimeBreak(
+        keyMatchingTimeSelect,
+        keyMatchingTimeOptions,
+        timeMatchingOption
+    );
     initHalfTimeBreak(roundResetSelect, roundResetArr, 1);
     displayHalfTimeBreak(1);
 
@@ -1312,6 +1333,7 @@ const onStartNewMatch = () => {
 
     isReg = false;
     isConfig = true;
+    timeMatchingOption = 1;
 };
 
 const resetModal = () => {
