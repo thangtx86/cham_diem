@@ -186,7 +186,8 @@ let redWinStatus = 0;
 
 const initializeGame = () => {
     txtTimer.textContent = formatTimeAsMMSS(timeLeft);
-
+    isReferee = ckbReferee.checked;
+    console.log('IsReferee: ' + isReferee);
     const timeDefault = formatTimeAsMMSS(timeLeft);
     const { minute, seconds } = extractMMSS(timeDefault);
     console.log(minute);
