@@ -743,7 +743,7 @@ const updateStatusOfRound = () => {
             stopTimerBreak();
             stopTimerStopCaring();
             stopTimerStopConsidering();
-            btnStart.disabled = true;
+            btnStart.disabled = false;
             btnStopCaring.disabled = true;
             btnStopConsidering.disabled = true;
             btnStop.disabled = true;
