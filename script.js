@@ -340,6 +340,10 @@ const handleKeyEvent = (event, isKeyDown) => {
                 onMinusGamJoemRed();
                 break;
             case keyDeukGamJoem.start_and_continue_key:
+                if (currentRound == 4) {
+                    alert('Một trận tối đa chỉ có 4 round');
+                    return;
+                }
                 if (isStartKey == false) {
                     console.log('Start');
 
