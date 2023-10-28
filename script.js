@@ -753,9 +753,11 @@ const updateStatusOfRound = () => {
             btnStop.disabled = true;
             btnResume.disabled = true;
             txtNumberOfRound.textContent = currentRound;
-            let _time = `${minutes < 10 ? '0' : ''}${minutes}:${
-                seconds < 10 ? '0' : ''
-            }${seconds}`;
+            const minutes4 = Math.floor(timeLeft / 60);
+            const seconds4 = timeLeft % 60;
+            let _time = `${minutes4 < 10 ? '0' : ''}${minutes4}:${
+                seconds4 < 10 ? '0' : ''
+            }${seconds4}`;
             let time_arr = {
                 title: '',
                 timer: _time
@@ -1339,6 +1341,10 @@ const onStartNewMatch = () => {
     isReg = false;
     isConfig = true;
     timeMatchingOption = 1;
+    currentRound = 1;
+    txtNumberOfRound.textContent = currentRound;
+    configModal.style.display = 'none';
+    console.log('END NEW MATCH: ' + currentRound);
 };
 
 const resetModal = () => {
