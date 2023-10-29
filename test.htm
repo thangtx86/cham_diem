@@ -42,13 +42,11 @@
 
             let redTeamScore = 0;
             let blueTeamScore = 0;
-            let pressedKeys = [];
+            let pressedKeys = ['', '', '', ''];
             let delay = 2000;
             let maxPressedKeys = 4;
 
             let lastKeyPressTime = Date.now();
-            let currentRound = 1;
-            let currentRoundScore = 0;
 
             function getFirstNCharacters(str, n) {
                 if (str.length >= n) {
@@ -57,25 +55,36 @@
                     return str;
                 }
             }
+            function containsAllCharacters(chuoi1, chuoi2) {
+                const charCount = {};
+
+                for (const char of chuoi2) {
+                    charCount[char] = (charCount[char] || 0) + 1;
+                }
+
+                for (const char of chuoi1) {
+                    if (!charCount[char]) {
+                        return false;
+                    }
+                    charCount[char]--;
+                }
+
+                return true;
+            }
 
             function updateScore() {
                 let currentTime = Date.now();
                 let pressedKeysString;
-
+                // console.log('P: ' + pressedKeys);
                 if (currentTime - lastKeyPressTime <= delay) {
                     pressedKeysString = pressedKeys.join('');
-
-                    let finalKey = getFirstNCharacters(pressedKeysString, 2);
-
+                    console.log(pressedKeysString);
+                    // console.log('--: ' + pressedKeys);
+                    let finalKey = getFirstNCharacters(pressedKeysString, 4);
+                    // console.log('----:' + finalKey);
                     for (let combination of keyCombinations) {
-                        const keysInCombination = combination.keys;
-                        const pressedKeysInCombination =
-                            keysInCombination.filter((k) =>
-                                pressedKeys.includes(k)
-                            );
-
                         let combinationString = combination.keys.join('');
-
+                        // console.log('+++' + combinationString);
                         if (pressedKeysString.includes(combinationString)) {
                             if (combination.team === 'red') {
                                 redTeamScore += combination.score;
@@ -88,21 +97,43 @@
                                     'blueTeam'
                                 ).textContent = `Blue Team Score: ${blueTeamScore}`;
                             }
-
+                            // Reset pressedKeys after a match
                             pressedKeys = [];
-                            currentRoundScore += combination.score;
                         }
                     }
                 } else {
                     pressedKeysString = '';
                 }
+            }
+            let keyCount = 0;
+            let isTurnCompleted = true; // Bắt đầu với lượt mới
+            let turnCount = 0; // Số lượt đã hoàn thành
 
-                if (currentRoundScore > 0) {
-                    console.log(
-                        `Lượt ${currentRound} đã hoàn thành! Điểm: ${currentRoundScore}`
-                    );
-                    currentRound++;
-                    currentRoundScore = 0;
+            function updatePressedKeys(key) {
+                key = key.toUpperCase();
+
+                // Tìm xem key có tồn tại trong keyCombinations không
+                const matchingCombination = keyCombinations.find(
+                    (combination) => combination.keys.includes(key)
+                );
+
+                if (matchingCombination) {
+                    // Tìm index của key trong keyCombinations
+                    const index = matchingCombination.keys.indexOf(key);
+
+                    // Lấy danh sách các phím trong keyCombinations
+                    const keysToAppend = matchingCombination.keys.slice(index);
+
+                    // Thêm các phím còn lại vào pressedKeys
+                    for (const k of keysToAppend) {
+                        if (!pressedKeys.includes(k)) {
+                            pressedKeys.push(k);
+                        }
+                    }
+
+                    // Hiển thị pressedKeys sau khi cập nhật
+                    console.log(pressedKeys);
+                    // updateScore();
                 }
             }
 
@@ -111,15 +142,44 @@
                 if (/[0-9A-Z,]/.test(key)) {
                     let currentTime = Date.now();
                     if (currentTime - lastKeyPressTime > delay) {
-                        pressedKeys = [];
+                        pressedKeys = ['', '', '', '']; // Đặt lại mảng về trạng thái ban đầu nếu đã vượt quá thời gian delay
+                        keyCount = 0; // Đặt lại số lượng phím đã nhập
                     }
 
-                    pressedKeys.push(key);
+                    if (keyCount < 2) {
+                        // Thêm phím mới vào mảng
+                        pressedKeys[keyCount] = key; // Sử dụng keyCount để xác định vị trí cần thay đổi
+                        keyCount++;
+                    } else {
+                        // Sau khi đã nhập 2 phím, tìm kết hợp trong keyCombinations
+                        const pressedKeyCombination = keyCombinations.find(
+                            (combination) => {
+                                return (
+                                    combination.keys.includes(pressedKeys[0]) &&
+                                    combination.keys.includes(pressedKeys[1])
+                                );
+                            }
+                        );
+
+                        if (pressedKeyCombination) {
+                            // Nếu tìm thấy kết hợp, thay thế các phím trống bằng các phím còn lại trong kết hợp
+                            for (let i = 2; i < pressedKeys.length; i++) {
+                                if (pressedKeys[i] === '') {
+                                    pressedKeys[i] =
+                                        pressedKeyCombination.keys.find(
+                                            (key) => !pressedKeys.includes(key)
+                                        );
+                                }
+                            }
+                        } else {
+                            // Nếu không tìm thấy kết hợp, thêm '*' vào 2 phím còn lại
+                            for (let i = 2; i < pressedKeys.length; i++) {
+                                pressedKeys[i] = '*';
+                            }
+                        }
+                    }
                     lastKeyPressTime = currentTime;
-
-                    if (pressedKeys.length > maxPressedKeys) {
-                        pressedKeys = [];
-                    }
+                    console.log(pressedKeys);
                     updateScore();
                 }
             });
