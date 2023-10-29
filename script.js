@@ -26,7 +26,7 @@ let keyCombinations = [
     { keys: ['2', 'W', 'S', 'X'], score: 2, team: 'blue' },
     { keys: ['8', 'I', 'K', ','], score: 3, team: 'blue' }
 ];
-
+let currentRoundTemp = 0;
 let timeLeft = TIME_DEFAULT;
 
 let halfTimeBreak = 45;
@@ -340,10 +340,10 @@ const handleKeyEvent = (event, isKeyDown) => {
                 onMinusGamJoemRed();
                 break;
             case keyDeukGamJoem.start_and_continue_key:
-                if (currentRound == 4) {
-                    alert('Một trận tối đa chỉ có 4 round');
-                    return;
-                }
+                // if (currentRound == 4) {
+                //     alert('Một trận tối đa chỉ có 4 round');
+                //     return;
+                // }
                 if (isStartKey == false) {
                     console.log('Start');
 
@@ -550,13 +550,25 @@ const pauseTimer = () => {
     isTimerRunning = false;
     displayHalfTimeBreak(1);
 };
+let preCurrentRound = 0;
 const stopRound = () => {
     isTimerBreak = false;
     displayHalfTimeBreak(2);
     stopTimer();
-    startTimerBreak();
-    stopTimerStopCaring();
-    stopTimerStopConsidering();
+    preCurrentRound = currentRound - 1;
+
+    // console.log('Het tran :::::' + preCurrentRound);
+
+    if (preCurrentRound == 3 && deukJoemTotalBlue != deukJoemTotalRed) {
+        displayHalfTimeBreak(5);
+    } else if (currentRoundTemp == 4) {
+        displayHalfTimeBreak(5);
+    } else {
+        startTimerBreak();
+        stopTimerStopCaring();
+        stopTimerStopConsidering();
+    }
+
     // displayHalfTimeBreak(1);
 };
 const stopTimer = () => {
@@ -649,6 +661,8 @@ let gamJoemTotalRed = 0;
 let isRefereePlus = false;
 let pop = null;
 const updateStatusOfRound = () => {
+    ++currentRoundTemp;
+
     deukJoemBlueArr[currentRound - 1] = scoreOfBlue;
     gamJoemBlueArr[currentRound - 1] = gamJoemBlue;
     deukJoemRedArr[currentRound - 1] = scoreOfRed;
@@ -720,6 +734,8 @@ const updateStatusOfRound = () => {
         txtGamJoemTotalRed.textContent = gamJoemTotalRed;
 
         if (currentRound == 3 && deukJoemTotalBlue != deukJoemTotalRed) {
+            //
+            console.log('0000000000000000000');
             displayHalfTimeBreak(1);
             stopTimerBreak();
             stopTimerStopCaring();
@@ -1154,6 +1170,17 @@ const displayHalfTimeBreak = (type) => {
                 minutesBreak < 10 ? '0' : ''
             }${minutesBreak}:${secondsBreak < 10 ? '0' : ''}${secondsBreak}`;
             startTimerStopConsidering();
+            break;
+        case 5:
+            viewContentTime.style.display = 'block';
+            txtTitleBreakTime.textContent = '';
+            viewContentTimeBreak.style.display = 'none';
+            txtTimer.textContent = 'End \n Game';
+            let time_arr = {
+                title: '',
+                timer: 'End \n Game'
+            };
+            sendMessage('timeArr', time_arr);
             break;
         default:
             break;
