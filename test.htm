@@ -1,138 +1,128 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .team {
-            margin: 20px;
-        }
-
-        #redTeam {
-            color: red;
-        }
-
-        #blueTeam {
-            color: blue;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="team" id="redTeam">Red : 0</div>
-        <div class "team" id="blueTeam">Blue: 0</div>
-    </div>
-
-    <script>
-        let keyCombinations = [
-            { keys: ['4', 'R', 'F', 'V'], score: 1, team: 'red' },
-            { keys: ['1', 'Q', 'A', 'Z'], score: 2, team: 'red' },
-            { keys: ['3', 'E', 'D', 'C'], score: 3, team: 'red' },
-            { keys: ['7', 'U', 'J', 'M'], score: 1, team: 'blue' },
-            { keys: ['2', 'W', 'S', 'X'], score: 2, team: 'blue' },
-            { keys: ['8', 'I', 'K', ','], score: 3, team: 'blue' }
-        ];
-
-        let redTeamScore = 0;
-        let blueTeamScore = 0;
-        let pressedKeys = [];
-        let delay = 2000;
-        let maxPressedKeys = 4;
-        let lastKeyPressTime = Date.now();
-
-        // Track which combinations have been used
-        let usedCombinations = {};
-
-        function getFirstNCharacters(str, n) {
-            if (str.length >= n) {
-                return str.substring(0, n);
-            } else {
-                return str;
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
             }
-        }
-
-        function containsAllCharacters(chuoi1, chuoi2) {
-            const charCount = {};
-
-            for (const char of chuoi2) {
-                charCount[char] = (charCount[char] || 0) + 1;
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            .team {
+                margin: 20px;
             }
 
-            for (const char of chuoi1) {
-                if (!charCount[char]) {
-                    return false;
+            #redTeam {
+                color: red;
+            }
+
+            #blueTeam {
+                color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="team" id="redTeam">Red : 0</div>
+            <div class="team" id="blueTeam">Blue: 0</div>
+        </div>
+
+        <script>
+            let keyCombinations = [
+                { keys: ['4', 'R', 'F', 'V'], score: 1, team: 'red' },
+                { keys: ['1', 'Q', 'A', 'Z'], score: 2, team: 'red' },
+                { keys: ['3', 'E', 'D', 'C'], score: 3, team: 'red' },
+                { keys: ['7', 'U', 'J', 'M'], score: 1, team: 'blue' },
+                { keys: ['2', 'W', 'S', 'X'], score: 2, team: 'blue' },
+                { keys: ['8', 'I', 'K', ','], score: 3, team: 'blue' }
+            ];
+
+            let redTeamScore = 0;
+            let blueTeamScore = 0;
+            let pressedKeys = [];
+            let delay = 2000;
+            let maxPressedKeys = 4;
+
+            let lastKeyPressTime = Date.now();
+            let currentRound = 1;
+            let currentRoundScore = 0;
+
+            function getFirstNCharacters(str, n) {
+                if (str.length >= n) {
+                    return str.substring(0, n);
+                } else {
+                    return str;
                 }
-                charCount[char]--;
             }
 
-            return true;
-        }
-
-        function updateScore() {
-            let currentTime = Date.now();
-            let pressedKeysString;
-            console.log('P: ' + pressedKeys);
-            if (currentTime - lastKeyPressTime <= delay) {
-                pressedKeysString = pressedKeys.join('');
-                console.log(pressedKeysString);
-                console.log('--: ' + pressedKeys);
-                let finalKey = getFirstNCharacters(pressedKeysString, 4);
-                // console.log('----:' + finalKey);
-                for (let combination of keyCombinations) {
-                    let combinationString = combination.keys.join('');
-                    // console.log('+++' + combinationString);
-                    if (
-                        containsAllCharacters(
-                            finalKey,
-                            combinationString
-                        ) &&
-                        finalKey.length >= 2 &&
-                        !usedCombinations[combinationString]
-                    ) {
-                        if (combination.team === 'red') {
-                            redTeamScore += combination.score;
-                            document.getElementById(
-                                'redTeam'
-                            ).textContent = `Red Team Score: ${redTeamScore}`;
-                        } else {
-                            blueTeamScore += combination.score;
-                            document.getElementById(
-                                'blueTeam'
-                            ).textContent = `Blue Team Score: ${blueTeamScore}`;
-                        }
-                        usedCombinations[combinationString] = true;
-                    }
-                }
-            } else {
-                pressedKeysString = '';
-            }
-        }
-
-        document.addEventListener('keydown', (event) => {
-            const key = event.key.toUpperCase();
-            if (/[0-9A-Z,]/.test(key)) {
+            function updateScore() {
                 let currentTime = Date.now();
-                if (currentTime - lastKeyPressTime > delay) {
-                    usedCombinations = {};
-                    pressedKeys = [];
+                let pressedKeysString;
+
+                if (currentTime - lastKeyPressTime <= delay) {
+                    pressedKeysString = pressedKeys.join('');
+
+                    let finalKey = getFirstNCharacters(pressedKeysString, 2);
+
+                    for (let combination of keyCombinations) {
+                        const keysInCombination = combination.keys;
+                        const pressedKeysInCombination =
+                            keysInCombination.filter((k) =>
+                                pressedKeys.includes(k)
+                            );
+
+                        let combinationString = combination.keys.join('');
+
+                        if (pressedKeysString.includes(combinationString)) {
+                            if (combination.team === 'red') {
+                                redTeamScore += combination.score;
+                                document.getElementById(
+                                    'redTeam'
+                                ).textContent = `Red Team Score: ${redTeamScore}`;
+                            } else {
+                                blueTeamScore += combination.score;
+                                document.getElementById(
+                                    'blueTeam'
+                                ).textContent = `Blue Team Score: ${blueTeamScore}`;
+                            }
+
+                            pressedKeys = [];
+                            currentRoundScore += combination.score;
+                        }
+                    }
+                } else {
+                    pressedKeysString = '';
                 }
-                pressedKeys.push(key);
-                lastKeyPressTime = currentTime;
-                if (pressedKeys.length > maxPressedKeys) {
-                    pressedKeys = [];
+
+                if (currentRoundScore > 0) {
+                    console.log(
+                        `Lượt ${currentRound} đã hoàn thành! Điểm: ${currentRoundScore}`
+                    );
+                    currentRound++;
+                    currentRoundScore = 0;
                 }
-                updateScore();
             }
-        });
-    </script>
-</body>
+
+            document.addEventListener('keydown', (event) => {
+                const key = event.key.toUpperCase();
+                if (/[0-9A-Z,]/.test(key)) {
+                    let currentTime = Date.now();
+                    if (currentTime - lastKeyPressTime > delay) {
+                        pressedKeys = [];
+                    }
+
+                    pressedKeys.push(key);
+                    lastKeyPressTime = currentTime;
+
+                    if (pressedKeys.length > maxPressedKeys) {
+                        pressedKeys = [];
+                    }
+                    updateScore();
+                }
+            });
+        </script>
+    </body>
 </html>
