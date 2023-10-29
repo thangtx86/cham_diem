@@ -344,26 +344,33 @@ const handleKeyEvent = (event, isKeyDown) => {
                 //     alert('Một trận tối đa chỉ có 4 round');
                 //     return;
                 // }
-                if (
-                    isStopCaringFlag == true ||
-                    isStopConsideringFlag == true ||
-                    isEndGame == true
-                ) {
-                    return;
-                }
-                if (isStartKey == false) {
-                    console.log('Start');
 
-                    isStartKey = true;
-                    startTimer();
+                if (isConfig && isReg) {
+                    if (
+                        isStopCaringFlag == true ||
+                        isStopConsideringFlag == true ||
+                        isEndGame == true
+                    ) {
+                        return;
+                    }
+                    if (isStartKey == false) {
+                        console.log('Start');
 
-                    isTimerRunning = true;
-                    // isTimerRunning = true;
+                        isStartKey = true;
+                        startTimer();
+
+                        isTimerRunning = true;
+                        // isTimerRunning = true;
+                    } else {
+                        console.log('End Start');
+                        isStartKey = false;
+                        isTimerRunning = false;
+                        stopRound();
+                    }
                 } else {
-                    console.log('End Start');
-                    isStartKey = false;
-                    isTimerRunning = false;
-                    stopRound();
+                    alert(
+                        'Vui lòng chỉnh sửa cấu hình trong Reg và Config trước khi bắt đầu trận đấu'
+                    );
                 }
 
                 break;
@@ -1401,6 +1408,8 @@ const onStartNewMatch = () => {
     console.log('END NEW MATCH: ' + currentRound);
     isEndGame = false;
     currentRoundTemp = 0;
+    isConfig = false;
+    isReg = false;
 };
 
 const resetModal = () => {
