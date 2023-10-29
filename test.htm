@@ -170,11 +170,11 @@
             document.addEventListener('keydown', (event) => {
                 const key = event.key.toUpperCase();
                 count++;
-                if (count == 4) {
-                    console.log('COUNT 4');
-                    pressedKeys[3] = '_';
-                    count = 0;
-                }
+                // if (count == 4) {
+                //     console.log('COUNT 4');
+                //     pressedKeys[3] = '_';
+                //     count = 0;
+                // }
                 if (isFull == false) {
                     if (/[0-9A-Z,]/.test(key)) {
                         let currentTime = Date.now();
