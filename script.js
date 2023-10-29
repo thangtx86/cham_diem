@@ -345,124 +345,124 @@ const handleKeyEvent = (event, isKeyDown) => {
                 //     return;
                 // }
 
-                if (isConfig && isReg) {
-                    if (
-                        isStopCaringFlag == true ||
-                        isStopConsideringFlag == true ||
-                        isEndGame == true
-                    ) {
-                        return;
-                    }
-                    if (isStartKey == false) {
-                        console.log('Start');
+                // if (isConfig && isReg) {
+                //     if (
+                //         isStopCaringFlag == true ||
+                //         isStopConsideringFlag == true ||
+                //         isEndGame == true
+                //     ) {
+                //         return;
+                //     }
+                //     if (isStartKey == false) {
+                //         console.log('Start');
 
-                        isStartKey = true;
-                        startTimer();
+                //         isStartKey = true;
+                //         startTimer();
 
-                        isTimerRunning = true;
-                        // isTimerRunning = true;
-                    } else {
-                        console.log('End Start');
-                        isStartKey = false;
-                        isTimerRunning = false;
-                        stopRound();
-                    }
-                } else {
-                    alert(
-                        'Vui lòng chỉnh sửa cấu hình trong Reg và Config trước khi bắt đầu trận đấu'
-                    );
-                }
+                //         isTimerRunning = true;
+                //         // isTimerRunning = true;
+                //     } else {
+                //         console.log('End Start');
+                //         isStartKey = false;
+                //         isTimerRunning = false;
+                //         stopRound();
+                //     }
+                // } else {
+                //     alert(
+                //         'Vui lòng chỉnh sửa cấu hình trong Reg và Config trước khi bắt đầu trận đấu'
+                //     );
+                // }
 
                 break;
             case keyDeukGamJoem.stop_taking_care_key:
-                if (isStopConsideringFlag == true || isTimerBreak == true) {
-                    return;
-                }
+                // if (isStopConsideringFlag == true || isTimerBreak == true) {
+                //     return;
+                // }
 
-                // if (isStopConsideringFlag == false) {
-                if (isStopCaringFlag == false) {
-                    isStopCaringFlag = true;
-                    pauseCaring();
-                    isTimerRunning = true;
-                    console.log('ON');
-                    const minutess = Math.floor(timeStopCaring / 60);
-                    const secondss = timeStopCaring % 60;
-                    let _times = `${minutess < 10 ? '0' : ''}${minutess}:${
-                        secondss < 10 ? '0' : ''
-                    }${secondss}`;
-                    let time_arr = {
-                        title: 'Dừng săn sóc',
-                        timer: _times
-                    };
-                    sendMessage('timeArr', time_arr);
-                    // btnResume.disabled = true;
-                } else {
-                    isStopCaringFlag = false;
-                    isTimerRunning = false;
-                    resumeRound();
-                    console.log('OFF');
-                    const minutesss = Math.floor(timeLeft / 60);
-                    const secondsss = timeLeft % 60;
-                    let _times = `${minutesss < 10 ? '0' : ''}${minutesss}:${
-                        secondsss < 10 ? '0' : ''
-                    }${secondsss}`;
-                    let time_arr = {
-                        title: '',
-                        timer: _times
-                    };
-                    sendMessage('timeArr', time_arr);
+                // // if (isStopConsideringFlag == false) {
+                // if (isStopCaringFlag == false) {
+                //     isStopCaringFlag = true;
+                //     pauseCaring();
+                //     isTimerRunning = true;
+                //     console.log('ON');
+                //     const minutess = Math.floor(timeStopCaring / 60);
+                //     const secondss = timeStopCaring % 60;
+                //     let _times = `${minutess < 10 ? '0' : ''}${minutess}:${
+                //         secondss < 10 ? '0' : ''
+                //     }${secondss}`;
+                //     let time_arr = {
+                //         title: 'Dừng săn sóc',
+                //         timer: _times
+                //     };
+                //     sendMessage('timeArr', time_arr);
+                //     // btnResume.disabled = true;
+                // } else {
+                //     isStopCaringFlag = false;
+                //     isTimerRunning = false;
+                //     resumeRound();
+                //     console.log('OFF');
+                //     const minutesss = Math.floor(timeLeft / 60);
+                //     const secondsss = timeLeft % 60;
+                //     let _times = `${minutesss < 10 ? '0' : ''}${minutesss}:${
+                //         secondsss < 10 ? '0' : ''
+                //     }${secondsss}`;
+                //     let time_arr = {
+                //         title: '',
+                //         timer: _times
+                //     };
+                //     sendMessage('timeArr', time_arr);
 
-                    // btnResume.disabled = false;
-                }
+                //     // btnResume.disabled = false;
+                // }
                 // } else {
                 //     alert('Đang dừng xem xét');
                 // }
 
                 break;
             case keyDeukGamJoem.stop_considering_key:
-                console.log(
-                    '1: ---: ' + isStopCaringFlag + ' --- ' + isTimerBreak
-                );
-                if (isStopCaringFlag == true || isTimerBreak == true) {
-                    return;
-                }
+                // console.log(
+                //     '1: ---: ' + isStopCaringFlag + ' --- ' + isTimerBreak
+                // );
+                // if (isStopCaringFlag == true || isTimerBreak == true) {
+                //     return;
+                // }
 
-                // if (isStopCaringFlag == false) {
-                if (isStopConsideringFlag == false) {
-                    // btnResume.disabled = true;
-                    isStopConsideringFlag = true;
+                // // if (isStopCaringFlag == false) {
+                // if (isStopConsideringFlag == false) {
+                //     // btnResume.disabled = true;
+                //     isStopConsideringFlag = true;
 
-                    pauseConsidering();
-                    isTimerRunning = true;
-                    const minutes3 = Math.floor(0 / 60);
-                    const seconds3 = 0 % 60;
-                    var _time3 = `${minutes3 < 10 ? '0' : ''}${minutes3}:${
-                        seconds3 < 10 ? '0' : ''
-                    }${seconds3}`;
-                    let time_arr3 = {
-                        title: 'Dừng xem xét',
-                        timer: _time3
-                    };
-                    sendMessage('timeArr', time_arr3);
-                } else {
-                    // isStopCaringFlag = false;
-                    isStopConsideringFlag = false;
-                    isTimerRunning = false;
-                    resumeRound();
+                //     pauseConsidering();
+                //     isTimerRunning = true;
+                //     const minutes3 = Math.floor(0 / 60);
+                //     const seconds3 = 0 % 60;
+                //     var _time3 = `${minutes3 < 10 ? '0' : ''}${minutes3}:${
+                //         seconds3 < 10 ? '0' : ''
+                //     }${seconds3}`;
+                //     let time_arr3 = {
+                //         title: 'Dừng xem xét',
+                //         timer: _time3
+                //     };
+                //     sendMessage('timeArr', time_arr3);
+                // } else {
+                //     // isStopCaringFlag = false;
+                //     isStopConsideringFlag = false;
+                //     isTimerRunning = false;
+                //     resumeRound();
 
-                    const minutesss2 = Math.floor(timeLeft / 60);
-                    const secondsss2 = timeLeft % 60;
-                    let _times2 = `${minutesss2 < 10 ? '0' : ''}${minutesss2}:${
-                        secondsss2 < 10 ? '0' : ''
-                    }${secondsss2}`;
-                    let time_arr2 = {
-                        title: '',
-                        timer: _times2
-                    };
-                    sendMessage('timeArr', time_arr2);
+                //     const minutesss2 = Math.floor(timeLeft / 60);
+                //     const secondsss2 = timeLeft % 60;
+                //     let _times2 = `${minutesss2 < 10 ? '0' : ''}${minutesss2}:${
+                //         secondsss2 < 10 ? '0' : ''
+                //     }${secondsss2}`;
+                //     let time_arr2 = {
+                //         title: '',
+                //         timer: _times2
+                //     };
+                //     sendMessage('timeArr', time_arr2);
 
-                    // btnResume.disabled = false;
-                }
+                //     // btnResume.disabled = false;
+                // }
 
                 break;
             default:
