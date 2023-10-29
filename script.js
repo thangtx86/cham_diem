@@ -1400,6 +1400,7 @@ const onStartNewMatch = () => {
     configModal.style.display = 'none';
     console.log('END NEW MATCH: ' + currentRound);
     isEndGame = false;
+    currentRoundTemp = 0;
 };
 
 const resetModal = () => {
