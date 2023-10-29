@@ -344,6 +344,13 @@ const handleKeyEvent = (event, isKeyDown) => {
                 //     alert('Một trận tối đa chỉ có 4 round');
                 //     return;
                 // }
+                if (
+                    isStopCaringFlag == true ||
+                    isStopConsideringFlag == true ||
+                    isEndGame == true
+                ) {
+                    return;
+                }
                 if (isStartKey == false) {
                     console.log('Start');
 
@@ -855,6 +862,19 @@ const updateTimer = () => {
         startTimerBreak();
         displayHalfTimeBreak(2);
         updateStatusOfRound();
+        preCurrentRound = currentRound - 1;
+
+        // console.log('Het tran :::::' + preCurrentRound);
+
+        if (preCurrentRound == 3 && deukJoemTotalBlue != deukJoemTotalRed) {
+            displayHalfTimeBreak(5);
+        } else if (currentRoundTemp == 4) {
+            displayHalfTimeBreak(5);
+        } else {
+            startTimerBreak();
+            stopTimerStopCaring();
+            stopTimerStopConsidering();
+        }
     } else {
         timeLeft--;
     }
@@ -1134,6 +1154,7 @@ const updateKeyDeukGamJoem = (value) => {
     keyDeukGamJoem['stop_taking_care_key'] = value.stop_taking_care_key;
     keyDeukGamJoem['stop_considering_key'] = value.stop_considering_key;
 };
+let isEndGame = false;
 
 const displayHalfTimeBreak = (type) => {
     switch (type) {
@@ -1141,12 +1162,15 @@ const displayHalfTimeBreak = (type) => {
             viewContentTime.style.display = 'block';
             txtTitleBreakTime.textContent = '';
             viewContentTimeBreak.style.display = 'none';
+            isEndGame = false;
             break;
         case 2:
             viewContentTime.style.display = 'none';
             txtTitleBreakTime.textContent = 'Nghỉ giữa hiệp';
             viewContentTimeBreak.style.display = 'block';
+            isEndGame = false;
             break;
+
         case 3:
             viewContentTime.style.display = 'none';
             txtTitleBreakTime.textContent = 'Dừng săn sóc';
@@ -1158,6 +1182,7 @@ const displayHalfTimeBreak = (type) => {
                 seconds < 10 ? '0' : ''
             }${seconds}`;
             startTimerStopCaring();
+            isEndGame = false;
             break;
         case 4:
             viewContentTime.style.display = 'none';
@@ -1170,10 +1195,12 @@ const displayHalfTimeBreak = (type) => {
                 minutesBreak < 10 ? '0' : ''
             }${minutesBreak}:${secondsBreak < 10 ? '0' : ''}${secondsBreak}`;
             startTimerStopConsidering();
+            isEndGame = false;
             break;
         case 5:
             viewContentTime.style.display = 'block';
             txtTitleBreakTime.textContent = '';
+            isEndGame = true;
             viewContentTimeBreak.style.display = 'none';
             txtTimer.textContent = 'End \n Game';
             let time_arr = {
@@ -1372,6 +1399,7 @@ const onStartNewMatch = () => {
     txtNumberOfRound.textContent = currentRound;
     configModal.style.display = 'none';
     console.log('END NEW MATCH: ' + currentRound);
+    isEndGame = false;
 };
 
 const resetModal = () => {
