@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Game</title>
+    </head>
+    <body>
+        <p>Score: <span id="score">0</span></p>
+        <script>
+            const validKeys = ['4', 'R', 'F', 'V'];
+            let score = 0;
+            let currentTurn = 1;
+            let keyPresses = [];
+            let timer;
+
+            // Lấy tham chiếu đến phần tử hiển thị điểm
+            const scoreDisplay = document.getElementById('score');
+
+            function handleKeyPress(event) {
+                const keyPressed = event.key.toUpperCase();
+                if (validKeys.includes(keyPressed)) {
+                    keyPresses.push(keyPressed);
+
+                    if (keyPresses.length === 2) {
+                        if (
+                            keyPresses[0] === validKeys[currentTurn - 1] &&
+                            keyPresses[1] === validKeys[currentTurn]
+                        ) {
+                            score++;
+                            currentTurn++;
+                        } else {
+                            currentTurn = 1;
+                        }
+
+                        keyPresses = [];
+                    }
+
+                    clearTimeout(timer);
+                    timer = setTimeout(() => {
+                        keyPresses = [];
+                        currentTurn = 1;
+                    }, 2000);
+
+                    // Cập nhật nội dung của phần tử hiển thị điểm
+                    scoreDisplay.textContent = score;
+                }
+            }
+
+            document.addEventListener('keypress', handleKeyPress);
+        </script>
+    </body>
+</html>
