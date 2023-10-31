@@ -1111,7 +1111,7 @@ const updateTimer = () => {
         } else if (currentRoundTemp == 4) {
             displayHalfTimeBreak(5);
         } else {
-            startTimerBreak();
+            // startTimerBreak();
             stopTimerStopCaring();
             stopTimerStopConsidering();
         }
