@@ -310,198 +310,426 @@ const handleKeyEvent = (event, isKeyDown) => {
     const timeSinceLastKeyPress = currentTime - lastKeyPressTime;
     const key = event.key.toUpperCase();
 
-    if (isKeyDown) {
-        keysPressed.add(key);
-        console.log(key);
+    // if (isKeyDown) {
+    //     keysPressed.add(key);
+    //     console.log(key);
 
-        switch (key) {
-            case keyDeukGamJoem.blue_minus_deuk_key:
-                onMinusScoreForBlue();
-                break;
-            case keyDeukGamJoem.blue_plus_deuk_key:
-                onPlusScoreForBlue();
-                break;
-            case keyDeukGamJoem.blue_plus_gam_joem_key:
-                onPlusGamJoemBlue();
-                break;
-            case keyDeukGamJoem.blue_minus_gam_joem_key:
-                onMinusGamJoemBlue();
-                break;
-            case keyDeukGamJoem.red_plus_deuk_key:
-                onPlusScoreForRed();
-                break;
-            case keyDeukGamJoem.red_minus_deuk_key:
-                onMinusScoreForRed();
-                break;
-            case keyDeukGamJoem.red_plus_gam_joem_key:
-                onPlusGamJoemRed();
-                break;
-            case keyDeukGamJoem.red_minus_gam_joem_key:
-                onMinusGamJoemRed();
-                break;
-            case keyDeukGamJoem.start_and_continue_key:
-                // if (currentRound == 4) {
-                //     alert('Một trận tối đa chỉ có 4 round');
-                //     return;
-                // }
+    switch (key) {
+        case keyDeukGamJoem.blue_minus_deuk_key:
+            onMinusScoreForBlue();
+            break;
+        case keyDeukGamJoem.blue_plus_deuk_key:
+            onPlusScoreForBlue();
+            break;
+        case keyDeukGamJoem.blue_plus_gam_joem_key:
+            onPlusGamJoemBlue();
+            break;
+        case keyDeukGamJoem.blue_minus_gam_joem_key:
+            onMinusGamJoemBlue();
+            break;
+        case keyDeukGamJoem.red_plus_deuk_key:
+            onPlusScoreForRed();
+            break;
+        case keyDeukGamJoem.red_minus_deuk_key:
+            onMinusScoreForRed();
+            break;
+        case keyDeukGamJoem.red_plus_gam_joem_key:
+            onPlusGamJoemRed();
+            break;
+        case keyDeukGamJoem.red_minus_gam_joem_key:
+            onMinusGamJoemRed();
+            break;
+        case keyDeukGamJoem.start_and_continue_key:
+            // if (currentRound == 4) {
+            //     alert('Một trận tối đa chỉ có 4 round');
+            //     return;
+            // }
 
-                // if (isConfig && isReg) {
-                //     if (
-                //         isStopCaringFlag == true ||
-                //         isStopConsideringFlag == true ||
-                //         isEndGame == true
-                //     ) {
-                //         return;
-                //     }
-                //     if (isStartKey == false) {
-                //         console.log('Start');
+            // if (isConfig && isReg) {
+            //     if (
+            //         isStopCaringFlag == true ||
+            //         isStopConsideringFlag == true ||
+            //         isEndGame == true
+            //     ) {
+            //         return;
+            //     }
+            //     if (isStartKey == false) {
+            //         console.log('Start');
 
-                //         isStartKey = true;
-                //         startTimer();
+            //         isStartKey = true;
+            //         startTimer();
 
-                //         isTimerRunning = true;
-                //         // isTimerRunning = true;
-                //     } else {
-                //         console.log('End Start');
-                //         isStartKey = false;
-                //         isTimerRunning = false;
-                //         stopRound();
-                //     }
-                // } else {
-                //     alert(
-                //         'Vui lòng chỉnh sửa cấu hình trong Reg và Config trước khi bắt đầu trận đấu'
-                //     );
-                // }
+            //         isTimerRunning = true;
+            //         // isTimerRunning = true;
+            //     } else {
+            //         console.log('End Start');
+            //         isStartKey = false;
+            //         isTimerRunning = false;
+            //         stopRound();
+            //     }
+            // } else {
+            //     alert(
+            //         'Vui lòng chỉnh sửa cấu hình trong Reg và Config trước khi bắt đầu trận đấu'
+            //     );
+            // }
 
-                break;
-            case keyDeukGamJoem.stop_taking_care_key:
-                // if (isStopConsideringFlag == true || isTimerBreak == true) {
-                //     return;
-                // }
+            break;
+        case keyDeukGamJoem.stop_taking_care_key:
+            // if (isStopConsideringFlag == true || isTimerBreak == true) {
+            //     return;
+            // }
 
-                // // if (isStopConsideringFlag == false) {
-                // if (isStopCaringFlag == false) {
-                //     isStopCaringFlag = true;
-                //     pauseCaring();
-                //     isTimerRunning = true;
-                //     console.log('ON');
-                //     const minutess = Math.floor(timeStopCaring / 60);
-                //     const secondss = timeStopCaring % 60;
-                //     let _times = `${minutess < 10 ? '0' : ''}${minutess}:${
-                //         secondss < 10 ? '0' : ''
-                //     }${secondss}`;
-                //     let time_arr = {
-                //         title: 'Dừng săn sóc',
-                //         timer: _times
-                //     };
-                //     sendMessage('timeArr', time_arr);
-                //     // btnResume.disabled = true;
-                // } else {
-                //     isStopCaringFlag = false;
-                //     isTimerRunning = false;
-                //     resumeRound();
-                //     console.log('OFF');
-                //     const minutesss = Math.floor(timeLeft / 60);
-                //     const secondsss = timeLeft % 60;
-                //     let _times = `${minutesss < 10 ? '0' : ''}${minutesss}:${
-                //         secondsss < 10 ? '0' : ''
-                //     }${secondsss}`;
-                //     let time_arr = {
-                //         title: '',
-                //         timer: _times
-                //     };
-                //     sendMessage('timeArr', time_arr);
+            // // if (isStopConsideringFlag == false) {
+            // if (isStopCaringFlag == false) {
+            //     isStopCaringFlag = true;
+            //     pauseCaring();
+            //     isTimerRunning = true;
+            //     console.log('ON');
+            //     const minutess = Math.floor(timeStopCaring / 60);
+            //     const secondss = timeStopCaring % 60;
+            //     let _times = `${minutess < 10 ? '0' : ''}${minutess}:${
+            //         secondss < 10 ? '0' : ''
+            //     }${secondss}`;
+            //     let time_arr = {
+            //         title: 'Dừng săn sóc',
+            //         timer: _times
+            //     };
+            //     sendMessage('timeArr', time_arr);
+            //     // btnResume.disabled = true;
+            // } else {
+            //     isStopCaringFlag = false;
+            //     isTimerRunning = false;
+            //     resumeRound();
+            //     console.log('OFF');
+            //     const minutesss = Math.floor(timeLeft / 60);
+            //     const secondsss = timeLeft % 60;
+            //     let _times = `${minutesss < 10 ? '0' : ''}${minutesss}:${
+            //         secondsss < 10 ? '0' : ''
+            //     }${secondsss}`;
+            //     let time_arr = {
+            //         title: '',
+            //         timer: _times
+            //     };
+            //     sendMessage('timeArr', time_arr);
 
-                //     // btnResume.disabled = false;
-                // }
-                // } else {
-                //     alert('Đang dừng xem xét');
-                // }
+            //     // btnResume.disabled = false;
+            // }
+            // } else {
+            //     alert('Đang dừng xem xét');
+            // }
 
-                break;
-            case keyDeukGamJoem.stop_considering_key:
-                // console.log(
-                //     '1: ---: ' + isStopCaringFlag + ' --- ' + isTimerBreak
-                // );
-                // if (isStopCaringFlag == true || isTimerBreak == true) {
-                //     return;
-                // }
+            break;
+        case keyDeukGamJoem.stop_considering_key:
+            // console.log(
+            //     '1: ---: ' + isStopCaringFlag + ' --- ' + isTimerBreak
+            // );
+            // if (isStopCaringFlag == true || isTimerBreak == true) {
+            //     return;
+            // }
 
-                // // if (isStopCaringFlag == false) {
-                // if (isStopConsideringFlag == false) {
-                //     // btnResume.disabled = true;
-                //     isStopConsideringFlag = true;
+            // // if (isStopCaringFlag == false) {
+            // if (isStopConsideringFlag == false) {
+            //     // btnResume.disabled = true;
+            //     isStopConsideringFlag = true;
 
-                //     pauseConsidering();
-                //     isTimerRunning = true;
-                //     const minutes3 = Math.floor(0 / 60);
-                //     const seconds3 = 0 % 60;
-                //     var _time3 = `${minutes3 < 10 ? '0' : ''}${minutes3}:${
-                //         seconds3 < 10 ? '0' : ''
-                //     }${seconds3}`;
-                //     let time_arr3 = {
-                //         title: 'Dừng xem xét',
-                //         timer: _time3
-                //     };
-                //     sendMessage('timeArr', time_arr3);
-                // } else {
-                //     // isStopCaringFlag = false;
-                //     isStopConsideringFlag = false;
-                //     isTimerRunning = false;
-                //     resumeRound();
+            //     pauseConsidering();
+            //     isTimerRunning = true;
+            //     const minutes3 = Math.floor(0 / 60);
+            //     const seconds3 = 0 % 60;
+            //     var _time3 = `${minutes3 < 10 ? '0' : ''}${minutes3}:${
+            //         seconds3 < 10 ? '0' : ''
+            //     }${seconds3}`;
+            //     let time_arr3 = {
+            //         title: 'Dừng xem xét',
+            //         timer: _time3
+            //     };
+            //     sendMessage('timeArr', time_arr3);
+            // } else {
+            //     // isStopCaringFlag = false;
+            //     isStopConsideringFlag = false;
+            //     isTimerRunning = false;
+            //     resumeRound();
 
-                //     const minutesss2 = Math.floor(timeLeft / 60);
-                //     const secondsss2 = timeLeft % 60;
-                //     let _times2 = `${minutesss2 < 10 ? '0' : ''}${minutesss2}:${
-                //         secondsss2 < 10 ? '0' : ''
-                //     }${secondsss2}`;
-                //     let time_arr2 = {
-                //         title: '',
-                //         timer: _times2
-                //     };
-                //     sendMessage('timeArr', time_arr2);
+            //     const minutesss2 = Math.floor(timeLeft / 60);
+            //     const secondsss2 = timeLeft % 60;
+            //     let _times2 = `${minutesss2 < 10 ? '0' : ''}${minutesss2}:${
+            //         secondsss2 < 10 ? '0' : ''
+            //     }${secondsss2}`;
+            //     let time_arr2 = {
+            //         title: '',
+            //         timer: _times2
+            //     };
+            //     sendMessage('timeArr', time_arr2);
 
-                //     // btnResume.disabled = false;
-                // }
+            //     // btnResume.disabled = false;
+            // }
 
-                break;
-            default:
-                break;
-        }
+            break;
+        default:
+            break;
+    }
+    // } else {
+    //     lastKeyPressTime = currentTime;
+    //     keysPressed.delete(key);
+    // }
+
+    // for (const combination of keyCombinations) {
+    //     const keysInCombination = combination.keys;
+    //     const pressedKeysInCombination = keysInCombination.filter((k) =>
+    //         keysPressed.has(k)
+    //     );
+    //     let minKey = 0;
+    //     if (isReferee) {
+    //         minKey = 2;
+    //     } else {
+    //         minKey = 3;
+    //     }
+    //     if (pressedKeysInCombination.length >= minKey) {
+    //         if (combination.team === 'red') {
+    //             if (timeSinceLastKeyPress <= timeMatchingOption) {
+    //                 scoreOfRed += combination.score;
+    //                 txtScoreRed.textContent = scoreOfRed;
+    //                 sendMessage('score_red', scoreOfRed);
+    //             }
+    //         } else {
+    //             if (timeSinceLastKeyPress <= timeMatchingOption) {
+    //                 scoreOfBlue += combination.score;
+    //                 txtScoreBlue.textContent = scoreOfBlue;
+    //                 sendMessage('score_blue', scoreOfBlue);
+    //             }
+    //         }
+    //         keysPressed.clear();
+    //     }
+    // }
+};
+
+function hasThreeSame(arr) {
+    const sortedArr = arr.slice().sort();
+
+    if (sortedArr[0] === sortedArr[1] && sortedArr[2] === sortedArr[3]) {
+        return true;
     } else {
-        lastKeyPressTime = currentTime;
-        keysPressed.delete(key);
+        return false;
+    }
+}
+
+function isSubsetArray(subArray, mainArray) {
+    return subArray.every((item) => mainArray.includes(item));
+}
+function equalsElement(arr) {
+    const sortedArr = arr.slice().sort();
+
+    if (sortedArr[0] === sortedArr[1] && sortedArr[2] === sortedArr[3]) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function equalsElement3(arr) {
+    const sortedArr = arr.slice().sort();
+
+    if (
+        sortedArr[0] === sortedArr[1] &&
+        sortedArr[2] === sortedArr[3] &&
+        sortedArr[4] === sortedArr[5]
+    ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+let isFitTime = false;
+function handleKeyUp(event) {
+    const currentTime = Date.now();
+    if (currentTime - lastKeyPressTime >= 2000) {
+        pressedKeys = [];
     }
 
-    for (const combination of keyCombinations) {
-        const keysInCombination = combination.keys;
-        const pressedKeysInCombination = keysInCombination.filter((k) =>
-            keysPressed.has(k)
-        );
-        let minKey = 0;
-        if (isReferee) {
-            minKey = 2;
-        } else {
-            minKey = 3;
-        }
-        if (pressedKeysInCombination.length >= minKey) {
-            if (combination.team === 'red') {
-                if (timeSinceLastKeyPress <= timeMatchingOption) {
-                    scoreOfRed += combination.score;
-                    txtScoreRed.textContent = scoreOfRed;
-                    sendMessage('score_red', scoreOfRed);
-                }
-            } else {
-                if (timeSinceLastKeyPress <= timeMatchingOption) {
-                    scoreOfBlue += combination.score;
-                    txtScoreBlue.textContent = scoreOfBlue;
-                    sendMessage('score_blue', scoreOfBlue);
+    const keyPressed = event.key.toUpperCase();
+
+    pressedKeys.push(keyPressed);
+
+    console.log(pressedKeys);
+    console.log(isFitTime);
+
+    let minKey = 0;
+    if (isReferee) {
+        minKey = 2;
+    } else {
+        minKey = 3;
+    }
+
+    if (minKey == 2) {
+        console.log('_______________________________');
+        if (pressedKeys.length == 2) {
+            const foundCombinations = keyCombinations.filter((combination) =>
+                isSubsetArray(pressedKeys, combination.keys)
+            );
+            for (const combination of keyCombinations) {
+                const keysInCombination = combination.keys.filter((key) =>
+                    pressedKeys.includes(key)
+                );
+                console.log('======: ' + keysInCombination);
+                if (keysInCombination.length == 2) {
+                    if (combination.team === 'red') {
+                        // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                        scoreOfRed += combination.score;
+                        txtScoreRed.textContent = scoreOfRed;
+                        sendMessage('score_red', scoreOfRed);
+                        // }
+                    } else {
+                        // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                        scoreOfBlue += combination.score;
+                        txtScoreBlue.textContent = scoreOfBlue;
+                        sendMessage('score_blue', scoreOfBlue);
+                        // }
+                    }
                 }
             }
-            keysPressed.clear();
+            console.log('++++:::' + JSON.stringify(foundCombinations));
+        }
+        if (pressedKeys.length == 4) {
+            if (equalsElement(pressedKeys)) {
+                for (const combination of keyCombinations) {
+                    const keysInCombination = combination.keys.filter((key) =>
+                        pressedKeys.slice(0, 2).includes(key)
+                    );
+                    // console.log('======: ' + keysInCombination);
+                    if (keysInCombination.length == minKey) {
+                        if (combination.team === 'red') {
+                            // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                            scoreOfRed += combination.score;
+                            txtScoreRed.textContent = scoreOfRed;
+                            sendMessage('score_red', scoreOfRed);
+                            // }
+                        } else {
+                            // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                            scoreOfBlue += combination.score;
+                            txtScoreBlue.textContent = scoreOfBlue;
+                            sendMessage('score_blue', scoreOfBlue);
+                            // }
+                        }
+                    }
+                    // if (pressedKeys.length == 4) {
+                    //     pressedKeys = [];
+                    // }
+                }
+            }
+
+            console.log('equalsElement:' + equalsElement(pressedKeys));
+            pressedKeys = [];
+        }
+    } else {
+        if (pressedKeys.length == 3) {
+            const foundCombinations = keyCombinations.filter((combination) =>
+                isSubsetArray(pressedKeys, combination.keys)
+            );
+            for (const combination of keyCombinations) {
+                const keysInCombination = combination.keys.filter((key) =>
+                    pressedKeys.includes(key)
+                );
+                // console.log('======3: ' + keysInCombination);
+                if (keysInCombination.length == 3) {
+                    if (combination.team === 'red') {
+                        // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                        scoreOfRed += combination.score;
+                        txtScoreRed.textContent = scoreOfRed;
+                        sendMessage('score_red', scoreOfRed);
+                        // }
+                    } else {
+                        // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                        scoreOfBlue += combination.score;
+                        txtScoreBlue.textContent = scoreOfBlue;
+                        sendMessage('score_blue', scoreOfBlue);
+                        // }
+                    }
+                }
+            }
+            // console.log('++++:::' + JSON.stringify(foundCombinations));
+        }
+
+        if (pressedKeys.length == 6) {
+            if (equalsElement3(pressedKeys)) {
+                // console.log('[]]]]:::' + pressedKeys);
+                for (const combination of keyCombinations) {
+                    const keysInCombination = combination.keys.filter((key) =>
+                        pressedKeys.slice(0, 3).includes(key)
+                    );
+                    console.log(
+                        'Leng = 6::::: ' +
+                            keysInCombination +
+                            ' --- ' +
+                            pressedKeys.slice(0, 3)
+                    );
+                    if (keysInCombination.length == minKey) {
+                        if (combination.team === 'red') {
+                            // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                            scoreOfRed += combination.score;
+                            txtScoreRed.textContent = scoreOfRed;
+                            sendMessage('score_red', scoreOfRed);
+                            // }
+                        } else {
+                            // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                            scoreOfBlue += combination.score;
+                            txtScoreBlue.textContent = scoreOfBlue;
+                            sendMessage('score_blue', scoreOfBlue);
+                            // }
+                        }
+                    }
+                }
+                pressedKeys = [];
+            }
+            // console.log('equalsElement3:' + equalsElement3(pressedKeys));
+        }
+        if (pressedKeys.length == 7) {
+            // if (equalsElement3(pressedKeys)) {
+            // console.log('[]]]]:::' + pressedKeys);
+
+            const newArrr = [
+                ...pressedKeys.slice(0, 3),
+                ...pressedKeys.slice(3 + 1)
+            ];
+            if (equalsElement3(newArrr)) {
+                for (const combination of keyCombinations) {
+                    const keysInCombination = combination.keys.filter((key) =>
+                        newArrr.slice(0, 3).includes(key)
+                    );
+                    console.log(
+                        'Leng = 6::::: ' +
+                            keysInCombination +
+                            ' --- ' +
+                            pressedKeys.slice(4, 7)
+                    );
+                    if (keysInCombination.length == minKey) {
+                        if (combination.team === 'red') {
+                            // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                            scoreOfRed += combination.score;
+                            txtScoreRed.textContent = scoreOfRed;
+                            sendMessage('score_red', scoreOfRed);
+                            // }
+                        } else {
+                            // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                            scoreOfBlue += combination.score;
+                            txtScoreBlue.textContent = scoreOfBlue;
+                            sendMessage('score_blue', scoreOfBlue);
+                            // }
+                        }
+                    }
+                    // }
+                    pressedKeys = [];
+                }
+            }
+            // console.log('equalsElement3:' + equalsElement3(pressedKeys));
+        }
+        if (pressedKeys.length == 8) {
+            pressedKeys = [];
         }
     }
-};
+
+    // isHandled = true;
+    lastKeyPressTime = currentTime;
+}
 
 // END GAM-JOEM
 

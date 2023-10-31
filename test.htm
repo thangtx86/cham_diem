@@ -23,10 +23,8 @@
                 return subArray.every((item) => mainArray.includes(item));
             }
             function equalsElement(arr) {
-                // Sắp xếp mảng để đảm bảo không quan trọng vị trí sắp xếp
                 const sortedArr = arr.slice().sort();
 
-                // Kiểm tra xem hai phần tử đầu và hai phần tử cuối có giống nhau không
                 if (
                     sortedArr[0] === sortedArr[1] &&
                     sortedArr[2] === sortedArr[3]
@@ -58,7 +56,7 @@
 
                 console.log(pressedKeys);
                 console.log(isFitTime);
-                if (pressedKeys.length == 3) {
+                if (pressedKeys.length == 2) {
                     const foundCombinations = keyCombinations.filter(
                         (combination) =>
                             isSubsetArray(pressedKeys, combination.keys)
@@ -68,7 +66,7 @@
                             (key) => pressedKeys.includes(key)
                         );
                         console.log('======: ' + keysInCombination);
-                        if (keysInCombination.length == 3) {
+                        if (keysInCombination.length == 2) {
                             const team = combination.team;
                             teamScores[team] += combination.score;
                             document.getElementById(
@@ -103,6 +101,19 @@
 
                 // isHandled = true;
                 lastKeyPressTime = currentTime;
+            }
+
+            let fff = ['1', 'Q', 'A'];
+            for (const combination of keyCombinations) {
+                const keysInCombination = combination.keys.filter((key) =>
+                    fff.slice(0, 2).includes(key)
+                );
+                console.log(
+                    'Leng = 6::::: ' +
+                        keysInCombination +
+                        ' --- ' +
+                        fff.slice(0, 3)
+                );
             }
 
             document.addEventListener('keyup', handleKeyUp);
