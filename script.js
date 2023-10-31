@@ -541,128 +541,39 @@ function equalsElement3(arr) {
 }
 let isFitTime = false;
 function handleKeyUp(event) {
-    const currentTime = Date.now();
-    if (currentTime - lastKeyPressTime >= 2000) {
-        pressedKeys = [];
-    }
-
-    const keyPressed = event.key.toUpperCase();
-
-    pressedKeys.push(keyPressed);
-
-    console.log(pressedKeys);
-    console.log(isFitTime);
-
-    let minKey = 0;
-    if (isReferee) {
-        minKey = 2;
-    } else {
-        minKey = 3;
-    }
-
-    if (minKey == 2) {
-        console.log('_______________________________');
-        if (pressedKeys.length == 2) {
-            const foundCombinations = keyCombinations.filter((combination) =>
-                isSubsetArray(pressedKeys, combination.keys)
-            );
-            for (const combination of keyCombinations) {
-                const keysInCombination = combination.keys.filter((key) =>
-                    pressedKeys.includes(key)
-                );
-                console.log('======: ' + keysInCombination);
-                if (keysInCombination.length == 2) {
-                    if (combination.team === 'red') {
-                        // if (timeSinceLastKeyPress <= timeMatchingOption) {
-                        scoreOfRed += combination.score;
-                        txtScoreRed.textContent = scoreOfRed;
-                        sendMessage('score_red', scoreOfRed);
-                        // }
-                    } else {
-                        // if (timeSinceLastKeyPress <= timeMatchingOption) {
-                        scoreOfBlue += combination.score;
-                        txtScoreBlue.textContent = scoreOfBlue;
-                        sendMessage('score_blue', scoreOfBlue);
-                        // }
-                    }
-                }
-            }
-            console.log('++++:::' + JSON.stringify(foundCombinations));
-        }
-        if (pressedKeys.length == 4) {
-            if (equalsElement(pressedKeys)) {
-                for (const combination of keyCombinations) {
-                    const keysInCombination = combination.keys.filter((key) =>
-                        pressedKeys.slice(0, 2).includes(key)
-                    );
-                    // console.log('======: ' + keysInCombination);
-                    if (keysInCombination.length == minKey) {
-                        if (combination.team === 'red') {
-                            // if (timeSinceLastKeyPress <= timeMatchingOption) {
-                            scoreOfRed += combination.score;
-                            txtScoreRed.textContent = scoreOfRed;
-                            sendMessage('score_red', scoreOfRed);
-                            // }
-                        } else {
-                            // if (timeSinceLastKeyPress <= timeMatchingOption) {
-                            scoreOfBlue += combination.score;
-                            txtScoreBlue.textContent = scoreOfBlue;
-                            sendMessage('score_blue', scoreOfBlue);
-                            // }
-                        }
-                    }
-                    // if (pressedKeys.length == 4) {
-                    //     pressedKeys = [];
-                    // }
-                }
-            }
-
-            console.log('equalsElement:' + equalsElement(pressedKeys));
+    if (isTimerBreak == false) {
+        const currentTime = Date.now();
+        if (currentTime - lastKeyPressTime >= 2000) {
             pressedKeys = [];
         }
-    } else {
-        if (pressedKeys.length == 3) {
-            const foundCombinations = keyCombinations.filter((combination) =>
-                isSubsetArray(pressedKeys, combination.keys)
-            );
-            for (const combination of keyCombinations) {
-                const keysInCombination = combination.keys.filter((key) =>
-                    pressedKeys.includes(key)
-                );
-                // console.log('======3: ' + keysInCombination);
-                if (keysInCombination.length == 3) {
-                    if (combination.team === 'red') {
-                        // if (timeSinceLastKeyPress <= timeMatchingOption) {
-                        scoreOfRed += combination.score;
-                        txtScoreRed.textContent = scoreOfRed;
-                        sendMessage('score_red', scoreOfRed);
-                        // }
-                    } else {
-                        // if (timeSinceLastKeyPress <= timeMatchingOption) {
-                        scoreOfBlue += combination.score;
-                        txtScoreBlue.textContent = scoreOfBlue;
-                        sendMessage('score_blue', scoreOfBlue);
-                        // }
-                    }
-                }
-            }
-            // console.log('++++:::' + JSON.stringify(foundCombinations));
+
+        const keyPressed = event.key.toUpperCase();
+
+        pressedKeys.push(keyPressed);
+
+        console.log(pressedKeys);
+        console.log(isFitTime);
+
+        let minKey = 0;
+        if (isReferee) {
+            minKey = 2;
+        } else {
+            minKey = 3;
         }
 
-        if (pressedKeys.length == 6) {
-            if (equalsElement3(pressedKeys)) {
-                // console.log('[]]]]:::' + pressedKeys);
+        if (minKey == 2) {
+            console.log('_______________________________');
+            if (pressedKeys.length == 2) {
+                const foundCombinations = keyCombinations.filter(
+                    (combination) =>
+                        isSubsetArray(pressedKeys, combination.keys)
+                );
                 for (const combination of keyCombinations) {
                     const keysInCombination = combination.keys.filter((key) =>
-                        pressedKeys.slice(0, 3).includes(key)
+                        pressedKeys.includes(key)
                     );
-                    console.log(
-                        'Leng = 6::::: ' +
-                            keysInCombination +
-                            ' --- ' +
-                            pressedKeys.slice(0, 3)
-                    );
-                    if (keysInCombination.length == minKey) {
+                    console.log('======: ' + keysInCombination);
+                    if (keysInCombination.length == 2) {
                         if (combination.team === 'red') {
                             // if (timeSinceLastKeyPress <= timeMatchingOption) {
                             scoreOfRed += combination.score;
@@ -678,30 +589,51 @@ function handleKeyUp(event) {
                         }
                     }
                 }
+                console.log('++++:::' + JSON.stringify(foundCombinations));
+            }
+            if (pressedKeys.length == 4) {
+                if (equalsElement(pressedKeys)) {
+                    for (const combination of keyCombinations) {
+                        const keysInCombination = combination.keys.filter(
+                            (key) => pressedKeys.slice(0, 2).includes(key)
+                        );
+                        // console.log('======: ' + keysInCombination);
+                        if (keysInCombination.length == minKey) {
+                            if (combination.team === 'red') {
+                                // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                                scoreOfRed += combination.score;
+                                txtScoreRed.textContent = scoreOfRed;
+                                sendMessage('score_red', scoreOfRed);
+                                // }
+                            } else {
+                                // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                                scoreOfBlue += combination.score;
+                                txtScoreBlue.textContent = scoreOfBlue;
+                                sendMessage('score_blue', scoreOfBlue);
+                                // }
+                            }
+                        }
+                        // if (pressedKeys.length == 4) {
+                        //     pressedKeys = [];
+                        // }
+                    }
+                }
+
+                console.log('equalsElement:' + equalsElement(pressedKeys));
                 pressedKeys = [];
             }
-            // console.log('equalsElement3:' + equalsElement3(pressedKeys));
-        }
-        if (pressedKeys.length == 7) {
-            // if (equalsElement3(pressedKeys)) {
-            // console.log('[]]]]:::' + pressedKeys);
-
-            const newArrr = [
-                ...pressedKeys.slice(0, 3),
-                ...pressedKeys.slice(3 + 1)
-            ];
-            if (equalsElement3(newArrr)) {
+        } else {
+            if (pressedKeys.length == 3) {
+                const foundCombinations = keyCombinations.filter(
+                    (combination) =>
+                        isSubsetArray(pressedKeys, combination.keys)
+                );
                 for (const combination of keyCombinations) {
                     const keysInCombination = combination.keys.filter((key) =>
-                        newArrr.slice(0, 3).includes(key)
+                        pressedKeys.includes(key)
                     );
-                    console.log(
-                        'Leng = 6::::: ' +
-                            keysInCombination +
-                            ' --- ' +
-                            pressedKeys.slice(4, 7)
-                    );
-                    if (keysInCombination.length == minKey) {
+                    // console.log('======3: ' + keysInCombination);
+                    if (keysInCombination.length == 3) {
                         if (combination.team === 'red') {
                             // if (timeSinceLastKeyPress <= timeMatchingOption) {
                             scoreOfRed += combination.score;
@@ -716,19 +648,91 @@ function handleKeyUp(event) {
                             // }
                         }
                     }
-                    // }
+                }
+                // console.log('++++:::' + JSON.stringify(foundCombinations));
+            }
+
+            if (pressedKeys.length == 6) {
+                if (equalsElement3(pressedKeys)) {
+                    // console.log('[]]]]:::' + pressedKeys);
+                    for (const combination of keyCombinations) {
+                        const keysInCombination = combination.keys.filter(
+                            (key) => pressedKeys.slice(0, 3).includes(key)
+                        );
+                        console.log(
+                            'Leng = 6::::: ' +
+                                keysInCombination +
+                                ' --- ' +
+                                pressedKeys.slice(0, 3)
+                        );
+                        if (keysInCombination.length == minKey) {
+                            if (combination.team === 'red') {
+                                // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                                scoreOfRed += combination.score;
+                                txtScoreRed.textContent = scoreOfRed;
+                                sendMessage('score_red', scoreOfRed);
+                                // }
+                            } else {
+                                // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                                scoreOfBlue += combination.score;
+                                txtScoreBlue.textContent = scoreOfBlue;
+                                sendMessage('score_blue', scoreOfBlue);
+                                // }
+                            }
+                        }
+                    }
                     pressedKeys = [];
                 }
+                // console.log('equalsElement3:' + equalsElement3(pressedKeys));
             }
-            // console.log('equalsElement3:' + equalsElement3(pressedKeys));
-        }
-        if (pressedKeys.length == 8) {
-            pressedKeys = [];
-        }
-    }
+            if (pressedKeys.length == 7) {
+                // if (equalsElement3(pressedKeys)) {
+                // console.log('[]]]]:::' + pressedKeys);
 
-    // isHandled = true;
-    lastKeyPressTime = currentTime;
+                const newArrr = [
+                    ...pressedKeys.slice(0, 3),
+                    ...pressedKeys.slice(3 + 1)
+                ];
+                if (equalsElement3(newArrr)) {
+                    for (const combination of keyCombinations) {
+                        const keysInCombination = combination.keys.filter(
+                            (key) => newArrr.slice(0, 3).includes(key)
+                        );
+                        console.log(
+                            'Leng = 6::::: ' +
+                                keysInCombination +
+                                ' --- ' +
+                                pressedKeys.slice(4, 7)
+                        );
+                        if (keysInCombination.length == minKey) {
+                            if (combination.team === 'red') {
+                                // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                                scoreOfRed += combination.score;
+                                txtScoreRed.textContent = scoreOfRed;
+                                sendMessage('score_red', scoreOfRed);
+                                // }
+                            } else {
+                                // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                                scoreOfBlue += combination.score;
+                                txtScoreBlue.textContent = scoreOfBlue;
+                                sendMessage('score_blue', scoreOfBlue);
+                                // }
+                            }
+                        }
+                        // }
+                        pressedKeys = [];
+                    }
+                }
+                // console.log('equalsElement3:' + equalsElement3(pressedKeys));
+            }
+            if (pressedKeys.length == 8) {
+                pressedKeys = [];
+            }
+        }
+
+        // isHandled = true;
+        lastKeyPressTime = currentTime;
+    }
 }
 
 // END GAM-JOEM
@@ -741,6 +745,7 @@ const startTimer = () => {
         btnStopConsidering.disabled = false;
         btnStop.disabled = false;
         btnResume.disabled = true;
+        isTimerBreak = false;
         displayHalfTimeBreak(1);
         isStartKey = true;
         if (timerIntervalBreak != null) {
@@ -1132,6 +1137,7 @@ const updateTimerBreak = () => {
 
     if (halfTimeBreak === 0) {
         clearInterval(timerIntervalBreak);
+        isTimerBreak = false;
     } else {
         halfTimeBreak--;
     }
