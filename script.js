@@ -632,10 +632,55 @@ function handleKeyUp(event) {
                 console.log('++++:::' + JSON.stringify(foundCombinations));
             }
             if (pressedKeys.length == 4) {
-                if (equalsElement(pressedKeys)) {
+                console.log('|||||||||||||||||');
+                const foundCombinationsFirst = keyCombinations.filter(
+                    (combination) =>
+                        isSubsetArray(pressedKeys.slice(0, 2), combination.keys)
+                );
+
+                const foundCombinationsSecond = keyCombinations.filter(
+                    (combination) =>
+                        isSubsetArray(pressedKeys.slice(-2), combination.keys)
+                );
+                console.log();
+                if (
+                    JSON.stringify(foundCombinationsFirst) ===
+                    JSON.stringify(foundCombinationsSecond)
+                ) {
+                    if (equalsElement(pressedKeys)) {
+                        for (const combination of keyCombinations) {
+                            const keysInCombination = combination.keys.filter(
+                                (key) => pressedKeys.slice(0, 2).includes(key)
+                            );
+                            // console.log('======: ' + keysInCombination);
+                            if (keysInCombination.length == minKey) {
+                                if (combination.team === 'red') {
+                                    // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                                    scoreOfRed += combination.score;
+                                    txtScoreRed.textContent = scoreOfRed;
+                                    sendMessage('score_red', scoreOfRed);
+                                    // }
+                                } else {
+                                    // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                                    scoreOfBlue += combination.score;
+                                    txtScoreBlue.textContent = scoreOfBlue;
+                                    sendMessage('score_blue', scoreOfBlue);
+                                    // }
+                                }
+                            }
+                            // if (pressedKeys.length == 4) {
+                            //     pressedKeys = [];
+                            // }
+                        }
+                    }
+
+                    console.log('equalsElement:' + equalsElement(pressedKeys));
+                    pressedKeys = [];
+                } else {
+                    // if (equalsElement(pressedKeys)) {
                     for (const combination of keyCombinations) {
                         const keysInCombination = combination.keys.filter(
-                            (key) => pressedKeys.slice(0, 2).includes(key)
+                            (key) => pressedKeys.slice(-2).includes(key)
                         );
                         // console.log('======: ' + keysInCombination);
                         if (keysInCombination.length == minKey) {
@@ -657,10 +702,11 @@ function handleKeyUp(event) {
                         //     pressedKeys = [];
                         // }
                     }
-                }
+                    // }
 
-                console.log('equalsElement:' + equalsElement(pressedKeys));
-                pressedKeys = [];
+                    console.log('equalsElement:' + equalsElement(pressedKeys));
+                    pressedKeys = [];
+                }
             }
         } else {
             if (pressedKeys.length == 3) {
