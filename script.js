@@ -225,6 +225,9 @@ const extractMMSS = (inputString) => {
 };
 
 const onPlusScoreForBlue = () => {
+    if (timeLeft == 0) {
+        return;
+    }
     scoreOfBlue++;
     txtScoreBlue.textContent = scoreOfBlue;
     sendMessage('score_blue', scoreOfBlue);
@@ -232,6 +235,9 @@ const onPlusScoreForBlue = () => {
 };
 
 const onMinusScoreForBlue = () => {
+    if (timeLeft == 0) {
+        return;
+    }
     if (scoreOfBlue > 0) {
         scoreOfBlue--;
         txtScoreBlue.textContent = scoreOfBlue;
@@ -240,12 +246,18 @@ const onMinusScoreForBlue = () => {
 };
 
 const onPlusScoreForRed = () => {
+    if (timeLeft == 0) {
+        return;
+    }
     scoreOfRed++;
     txtScoreRed.textContent = scoreOfRed;
     sendMessage('score_red', scoreOfRed);
 };
 
 const onMinusScoreForRed = () => {
+    if (timeLeft == 0) {
+        return;
+    }
     if (scoreOfRed > 0) {
         scoreOfRed--;
         txtScoreRed.textContent = scoreOfRed;
@@ -255,6 +267,9 @@ const onMinusScoreForRed = () => {
 
 //GAM-JOEM
 const onPlusGamJoemBlue = () => {
+    if (timeLeft == 0) {
+        return;
+    }
     gamJoemBlue++;
     scoreOfRed++;
     txtGamJoemBlue.textContent = gamJoemBlue;
@@ -264,6 +279,9 @@ const onPlusGamJoemBlue = () => {
 };
 
 const onMinusGamJoemBlue = () => {
+    if (timeLeft == 0) {
+        return;
+    }
     if (gamJoemBlue > 0) {
         gamJoemBlue--;
         scoreOfRed--;
@@ -275,6 +293,9 @@ const onMinusGamJoemBlue = () => {
 };
 
 const onPlusGamJoemRed = () => {
+    if (timeLeft == 0) {
+        return;
+    }
     gamJoemRed++;
     scoreOfBlue++;
     txtGamJoemRed.textContent = gamJoemRed;
@@ -284,6 +305,9 @@ const onPlusGamJoemRed = () => {
 };
 
 const onMinusGamJoemRed = () => {
+    if (timeLeft == 0) {
+        return;
+    }
     if (gamJoemRed > 0) {
         gamJoemRed--;
         scoreOfBlue--;
@@ -301,8 +325,24 @@ const handleKeyEvent = (event, isKeyDown) => {
     // if (!isTimerRunning) {
     //     return;
     // }
-    console.log('KeyEvent: ' + isPauseKeyEvent);
+    // console.log('KeyEvent: ' + isPauseKeyEvent);
+    console.log(
+        'Timer Break: ' +
+            isTimerBreak +
+            ' Caring: ' +
+            isStopCaringFlag +
+            ' --Consider ' +
+            isStopConsideringFlag
+    );
     if (isPauseKeyEvent == true) {
+        return;
+    }
+
+    if (
+        isTimerBreak == true ||
+        isStopCaringFlag == true ||
+        isStopConsideringFlag == true
+    ) {
         return;
     }
 
@@ -746,6 +786,8 @@ const startTimer = () => {
         btnStop.disabled = false;
         btnResume.disabled = true;
         isTimerBreak = false;
+        isStopCaringFlag = false;
+        isStopConsideringFlag = false;
         displayHalfTimeBreak(1);
         isStartKey = true;
         if (timerIntervalBreak != null) {
@@ -775,13 +817,14 @@ const startTimer = () => {
 
 const pauseCaring = () => {
     pauseTimer();
-
+    isStopCaringFlag = false;
     // startTimerBreak();
     displayHalfTimeBreak(3);
 };
 const pauseConsidering = () => {
     pauseTimer();
 
+    isStopConsideringFlag = false;
     // startTimerBreak();
     displayHalfTimeBreak(4);
 };
@@ -799,7 +842,11 @@ const pauseTimer = () => {
 };
 let preCurrentRound = 0;
 const stopRound = () => {
+    isStopCaringFlag = false;
+    isStopConsideringFlag = false;
     isTimerBreak = false;
+    isStopCaringFlag = false;
+    isStopConsideringFlag = false;
     displayHalfTimeBreak(2);
     stopTimer();
     preCurrentRound = currentRound - 1;
@@ -824,7 +871,8 @@ const stopTimer = () => {
     btnStopConsidering.disabled = true;
     btnStop.disabled = true;
     btnResume.disabled = true;
-
+    isStopCaringFlag = false;
+    isStopConsideringFlag = false;
     clearInterval(timerInterval);
     timeLeft = timeEachRound;
     updateTimer();
@@ -1080,6 +1128,8 @@ const formatTimeAsMMSS = (number) => {
 };
 
 const updateTimer = () => {
+    isStopCaringFlag = false;
+    isStopConsideringFlag = false;
     const minutes = Math.floor(timeLeft / 60);
     const seconds = timeLeft % 60;
     let _time = `${minutes < 10 ? '0' : ''}${minutes}:${
@@ -1147,7 +1197,7 @@ let timeStopCaring = 60;
 const updateTimerStopCaring = () => {
     const minutes = Math.floor(timeStopCaring / 60);
     const seconds = timeStopCaring % 60;
-
+    isStopCaringFlag = true;
     var _time = `${minutes < 10 ? '0' : ''}${minutes}:${
         seconds < 10 ? '0' : ''
     }${seconds}`;
@@ -1171,6 +1221,7 @@ const updateTimerStopCaring = () => {
 let timeStopConsidering = 0;
 const updateTimerStopConsidering = () => {
     console.log('Stop considering is running');
+    isStopConsideringFlag = true;
     const minutes = Math.floor(timeStopConsidering / 60);
     const seconds = timeStopConsidering % 60;
     var _time = `${minutes < 10 ? '0' : ''}${minutes}:${
