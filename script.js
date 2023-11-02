@@ -739,36 +739,88 @@ function handleKeyUp(event) {
             }
 
             if (pressedKeys.length == 6) {
-                if (equalsElement3(pressedKeys)) {
-                    // console.log('[]]]]:::' + pressedKeys);
+                const foundCombinations31 = keyCombinations.filter(
+                    (combination) =>
+                        isSubsetArray(pressedKeys.slice(0, 3), combination.keys)
+                );
+
+                const foundCombinations33 = keyCombinations.filter(
+                    (combination) =>
+                        isSubsetArray(pressedKeys.slice(-3), combination.keys)
+                );
+
+                console.log();
+                if (
+                    JSON.stringify(foundCombinations31) ===
+                    JSON.stringify(foundCombinations33)
+                ) {
+                    if (equalsElement3(pressedKeys)) {
+                        // console.log('[]]]]:::' + pressedKeys);
+                        for (const combination of keyCombinations) {
+                            const keysInCombination = combination.keys.filter(
+                                (key) => pressedKeys.slice(0, 3).includes(key)
+                            );
+                            console.log(
+                                'Leng = 6::::: ' +
+                                    keysInCombination +
+                                    ' --- ' +
+                                    pressedKeys.slice(0, 3)
+                            );
+                            if (keysInCombination.length == minKey) {
+                                if (combination.team === 'red') {
+                                    // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                                    scoreOfRed += combination.score;
+                                    txtScoreRed.textContent = scoreOfRed;
+                                    sendMessage('score_red', scoreOfRed);
+                                    // }
+                                } else {
+                                    // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                                    scoreOfBlue += combination.score;
+                                    txtScoreBlue.textContent = scoreOfBlue;
+                                    sendMessage('score_blue', scoreOfBlue);
+                                    // }
+                                }
+                            }
+                        }
+                        pressedKeys = [];
+                    }
+                } else {
+                    let isDoneP = false;
                     for (const combination of keyCombinations) {
                         const keysInCombination = combination.keys.filter(
-                            (key) => pressedKeys.slice(0, 3).includes(key)
+                            (key) => pressedKeys.slice(-3).includes(key)
                         );
-                        console.log(
-                            'Leng = 6::::: ' +
-                                keysInCombination +
-                                ' --- ' +
-                                pressedKeys.slice(0, 3)
-                        );
+                        // console.log('======: ' + keysInCombination);
                         if (keysInCombination.length == minKey) {
                             if (combination.team === 'red') {
                                 // if (timeSinceLastKeyPress <= timeMatchingOption) {
                                 scoreOfRed += combination.score;
                                 txtScoreRed.textContent = scoreOfRed;
+                                isDoneP = true;
                                 sendMessage('score_red', scoreOfRed);
                                 // }
                             } else {
                                 // if (timeSinceLastKeyPress <= timeMatchingOption) {
                                 scoreOfBlue += combination.score;
                                 txtScoreBlue.textContent = scoreOfBlue;
-                                sendMessage('score_blue', scoreOfBlue);
+                                isDoneP = true;
                                 // }
                             }
                         }
+                        if (isDoneP) {
+                            pressedKeys = [];
+                        }
+                        // if (pressedKeys.length == 4) {
+                        //     pressedKeys = [];
+                        // }
                     }
-                    pressedKeys = [];
+                    // }
+
+                    console.log('equalsElement:' + equalsElement(pressedKeys));
+                    // pressedKeys = [];
+                    console.log('OOOOOO');
                 }
+
                 // console.log('equalsElement3:' + equalsElement3(pressedKeys));
             }
             if (pressedKeys.length == 7) {
@@ -779,10 +831,55 @@ function handleKeyUp(event) {
                     ...pressedKeys.slice(0, 3),
                     ...pressedKeys.slice(3 + 1)
                 ];
-                if (equalsElement3(newArrr)) {
+
+                const foundCombinations311 = keyCombinations.filter(
+                    (combination) =>
+                        isSubsetArray(pressedKeys.slice(0, 3), combination.keys)
+                );
+
+                const foundCombinations332 = keyCombinations.filter(
+                    (combination) =>
+                        isSubsetArray(pressedKeys.slice(3), combination.keys)
+                );
+                console.log('{{{}}}}:  ' + pressedKeys.slice(3));
+                if (
+                    JSON.stringify(foundCombinations311) ===
+                    JSON.stringify(foundCombinations332)
+                ) {
+                    if (equalsElement3(newArrr)) {
+                        for (const combination of keyCombinations) {
+                            const keysInCombination = combination.keys.filter(
+                                (key) => newArrr.slice(0, 3).includes(key)
+                            );
+                            console.log(
+                                'Leng = 6::::: ' +
+                                    keysInCombination +
+                                    ' --- ' +
+                                    pressedKeys.slice(4, 7)
+                            );
+                            if (keysInCombination.length == minKey) {
+                                if (combination.team === 'red') {
+                                    // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                                    scoreOfRed += combination.score;
+                                    txtScoreRed.textContent = scoreOfRed;
+                                    sendMessage('score_red', scoreOfRed);
+                                    // }
+                                } else {
+                                    // if (timeSinceLastKeyPress <= timeMatchingOption) {
+                                    scoreOfBlue += combination.score;
+                                    txtScoreBlue.textContent = scoreOfBlue;
+                                    sendMessage('score_blue', scoreOfBlue);
+                                    // }
+                                }
+                            }
+                            // }
+                            pressedKeys = [];
+                        }
+                    }
+                } else {
                     for (const combination of keyCombinations) {
                         const keysInCombination = combination.keys.filter(
-                            (key) => newArrr.slice(0, 3).includes(key)
+                            (key) => newArrr.slice(4, 7).includes(key)
                         );
                         console.log(
                             'Leng = 6::::: ' +
@@ -808,8 +905,9 @@ function handleKeyUp(event) {
                         // }
                         pressedKeys = [];
                     }
+
+                    // console.log('equalsElement3:' + equalsElement3(pressedKeys));
                 }
-                // console.log('equalsElement3:' + equalsElement3(pressedKeys));
             }
             if (pressedKeys.length == 8) {
                 pressedKeys = [];
